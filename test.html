@@ -5,6 +5,7 @@
     function changepic(x,y){
         document.getElementById('chick').src=x;
         document.getElementById('type').innerHTML=y
+        alert("image changed");
     }
 </script>
 
@@ -27,7 +28,7 @@
 
 <div class="center">
     <img class="center" id="chick" src="img/chicken.png" alt="Animutate" height="400" style="width:50%"><br>
-    <p class =center id="type">Chicken</p><br>
+    <p class =center id="type">White Chicken</p><br>
     <button type="button" onclick="changepic('img/chicken.png','white chicken')" >Change to white Chicken</button>
     <button type="button" onclick="changepic('img/brownChicken.jpeg','brown chicken')">Change to brown Chicken</button>
     <button type="button" onclick="changepic('img/blueChicken.webp','blue chicken')">Change to blue Chicken</button>
