@@ -11,6 +11,10 @@ div.formcenters {
     margin-left: 45%;
 }
 
+div.sidebyside {
+    float: left
+}
+
 
 form.centers {
     display: inline-block;
