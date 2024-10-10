@@ -11,10 +11,20 @@ div.formcenters {
     margin-left: 45%;
 }
 
-div.sidebyside {
-    float: left;
-}
 
+
+.float-child1 {
+    width: 90%;
+    float: left;
+    padding: 20px;
+    border: 2px solid red;
+}
+.float-child1 {
+    width: 10%;
+    float: left;
+    padding: 20px;
+    border: 2px solid red;
+}
 
 form.centers {
     display: inline-block;
