@@ -16,13 +16,13 @@ div.formcenters {
 .float-child1 {
     width: 80%;
     float: left;
-    padding: 20px;
+    padding: 5px;
     border: 2px solid red;
 }
 .float-child2 {
     width: 10%;
     float: left;
-    padding: 20px;
+    padding: 3px;
     border: 2px solid red;
 }
 
