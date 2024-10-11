@@ -14,18 +14,16 @@ div.formcenters {
 
 
 .float-child1 {
-    width: 80%;
-    height: 60px;
+    width: 82%;
+    height: 56px;
     float: left;
     padding: 5px;
-    border: 2px solid red;
 }
 .float-child2 {
-    width: 10%;
+    width: 8%;
     height: 60px;
     float: left;
     padding: 3px;
-    border: 2px solid red;
 }
 
 form.centers {
@@ -51,10 +49,13 @@ th, td {
 .center {
     margin-left: auto;
     margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .title { 
     background-color: aquamarine;
+    border: 1px black;
 }
 
 .column {
