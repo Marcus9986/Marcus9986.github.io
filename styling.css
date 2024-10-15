@@ -14,13 +14,13 @@ div.formcenters {
 
 
 .float-child1 {
-    width: 82%;
+    width: 90%;
     height: 56px;
     float: left;
     padding: 5px;
 }
 .float-child2 {
-    width: 8%;
+    width: 3%;
     height: 60px;
     float: left;
     padding: 3px;
