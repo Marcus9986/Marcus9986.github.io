@@ -56,6 +56,8 @@ th, td {
 .title { 
     background-color: aquamarine;
     border: 1px black;
+    overflow: auto; /* If children are floating, the content colapses. 
+                    use overflow to restore expected behaviour. */
 }
 
 .column {
