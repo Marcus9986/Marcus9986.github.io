@@ -60,6 +60,13 @@ th, td {
                     use overflow to restore expected behaviour. */
 }
 
+.stink { 
+    background-color: palevioletred;
+    border: 1px black;
+    overflow: auto; /* If children are floating, the content colapses. 
+                    use overflow to restore expected behaviour. */
+}
+
 .column {
     float: left;
     margin-left: 1.5%;
