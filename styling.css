@@ -61,7 +61,7 @@ th, td {
 }
 
 .stink { 
-    background-color: palevioletred;
+    background-color: pink;
     border: 1px black;
     overflow: auto; /* If children are floating, the content colapses. 
                     use overflow to restore expected behaviour. */
