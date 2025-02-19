@@ -3,6 +3,10 @@ p {
     color: black;
 }
 
+div.row {
+    display: flex;
+}
+
 div.ulcenters {
     text-align: center;
 }
@@ -68,18 +72,16 @@ th, td {
 }
 
 .column {
-    float: left;
+
     margin-left: 1.5%;
     margin-right: 1.5%;
-    width: 30%;
     text-align: center;
-    border: 2px solid black
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #c4ffa1;
   }
   
-  /* Clear floats after image containers */
-  .row::after {
-    content: "";
-    clear: both;
-    display: table;
-
-  }
+.icon {
+    border-radius: 8px;
+    border: 1px solid black;
+}
