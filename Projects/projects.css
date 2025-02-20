@@ -24,4 +24,6 @@ div.project--placeholder {
     border-radius: 10px;
     border: 1px solid black;
     margin: 0 10px 0 0;
+    min-height: 100px;
+    height: auto;
 }
