@@ -15,7 +15,8 @@ try {
   const res = await fetch(`https://api.github.com/users/${USER}/repos?type=owner&per_page=100&sort=pushed`, { headers })
   if (!res.ok) throw new Error(`GitHub API ${res.status} ${res.statusText}`)
   const repos = (await res.json())
-    .filter((r) => !r.fork && !r.archived && !r.private && r.topics?.includes(TOPIC))
+    // Tagging is an explicit opt-in, so tagged forks (e.g. your copy of a group repo) are included.
+    .filter((r) => !r.archived && !r.private && r.topics?.includes(TOPIC))
     .map((r) => ({
       name: r.name,
       description: r.description,

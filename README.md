@@ -36,7 +36,7 @@ Every word and link on the site comes from `src/data.js`, `src/drafts.js` and `s
 
 ## How projects are put together
 
-- **Synced repos (`src/repos.json`).** Each public repo with the `portfolio` topic, except forks and archived repos, is saved here: name, description, language, topics, homepage and dates. The snapshot only changes when something changes on GitHub.
+- **Synced repos (`src/repos.json`).** Each public repo with the `portfolio` topic is saved here, including forks such as your copy of a group project (archived repos are skipped): name, description, language, topics, homepage and dates. The snapshot only changes when something changes on GitHub.
 - **Hand-written entries (`src/data.js` and `src/drafts.js`).** An entry with `repo: '<repo-name>'` is merged with that repo:
   - **Every field you write wins.**
   - Any field you leave out (`name`, `tagline`, `when`, `stack`, `links`) is filled from GitHub and stays current.
