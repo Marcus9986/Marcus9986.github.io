@@ -37,7 +37,6 @@ He is a developer focused on backend and web work who also ships games. Animutat
 - Contact email: `marcussecord@gmail.com`, which may be shown publicly on the site.
 - External profiles: GitHub `https://github.com/Marcus9986`, LinkedIn `https://www.linkedin.com/in/marcus-secord`, itch.io `https://marcus9986.itch.io/`.
 - Animutate is embedded from itch.io (embed id `7705905`). If the embed fails, the page links to the game on itch.io.
-- Undecided: which existing pages move into the new site. Existing pages are the JS test page, the rental site mockup, the loading-screen exercise and the projects list.
 
 ## Brand Commitments
 
@@ -46,10 +45,10 @@ He is a developer focused on backend and web work who also ships games. Animutat
 
 ## Evidence on Hand
 
-- **Animutate**: an itch.io game, with a screenshot at `img/Animutate.png`.
-- **Queen's University Community Housing**: a mock rental website (`Main/rental.html`), with images `img/rentalProperty.png`, `img/msp-pricing.png` and `img/group.jpg`. Image source notes are in `img/ref`.
-- **Loading screen**: a front-end exercise (`Projects/loading screen/`).
-- **Absent, do not fabricate**: backend projects (none in the repo yet, despite the backend focus), testimonials, employers, skills lists, graduation year and metrics. Leave clear slots for these instead of inventing them.
+- **Rouge Valley Conservation Centre site** (Queen's Web Development Club group project, Next.js + Express + MongoDB). Marcus wrote most of the Express REST API (`src/server/app.js`, 18 of 20 commits): CRUD routes for alerts, education programs, kids' programs, special events and general content, MongoDB/Mongoose models and the database connection, Cloudinary photo uploads, and the content dashboards. The JWT admin login was written by a teammate, so don't credit it to Marcus. The repo is private. The public demo, a stripped-down version without the dashboard or outdated information, is at `https://ws26t04-rougevalley-test.vercel.app/`.
+- **Animutate**: a Unity (C#) game on itch.io, with a public repo at `https://github.com/Marcus9986/Animutate-main` (all 30 commits by Marcus) and a screenshot at `img/Animutate.png`.
+- The old pages (rental mockup, loading screen, JS test, projects list) don't carry over to the new site.
+- **Absent, do not fabricate**: testimonials, employers and metrics. Leave them off the site until real ones exist, with no placeholder slots. The skills list is deferred, so leave it off for now. Don't show the graduation year.
 
 ## Product Principles
 

@@ -1,0 +1,501 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-18T12:00:00Z",
+  "title": "Design System: Marcus Secord",
+  "extensions": {
+    "colorMeta": {
+      "archive-void": {
+        "role": "neutral",
+        "displayName": "Archive Void",
+        "canonical": "#05070c",
+        "tonalRamp": [
+          "#05070c",
+          "#0f131c",
+          "#1b2130",
+          "#2b3346",
+          "#465068",
+          "#6c7790",
+          "#a2abbd",
+          "#dde1e9"
+        ]
+      },
+      "plate-glass": {
+        "role": "primary",
+        "displayName": "Plate Glass",
+        "canonical": "#0b1f3a",
+        "tonalRamp": [
+          "#06111f",
+          "#0b1f3a",
+          "#163258",
+          "#234a7c",
+          "#3a66a0",
+          "#6489bd",
+          "#9ab3d8",
+          "#d6e2f1"
+        ]
+      },
+      "lightbox-glow": {
+        "role": "primary",
+        "displayName": "Lightbox Glow",
+        "canonical": "#2f6fb3",
+        "tonalRamp": [
+          "#0c2340",
+          "#143a66",
+          "#1f548d",
+          "#2f6fb3",
+          "#5089c6",
+          "#7ea8d7",
+          "#b1cbe8",
+          "#e0ebf7"
+        ]
+      },
+      "ice-ink": {
+        "role": "neutral",
+        "displayName": "Ice Ink",
+        "canonical": "#dfeefc",
+        "tonalRamp": [
+          "#1a2733",
+          "#33475a",
+          "#4f6680",
+          "#6f88a3",
+          "#9fb8d3",
+          "#bfd4e8",
+          "#dfeefc",
+          "#f3f9ff"
+        ]
+      },
+      "ice-ink-dim": {
+        "role": "neutral",
+        "displayName": "Ice Ink Dim",
+        "canonical": "#9fb8d3",
+        "tonalRamp": [
+          "#1a2733",
+          "#33475a",
+          "#4f6680",
+          "#6f88a3",
+          "#9fb8d3",
+          "#bfd4e8",
+          "#dfeefc",
+          "#f3f9ff"
+        ]
+      },
+      "cyan-ring-ink": {
+        "role": "secondary",
+        "displayName": "Cyan Ring Ink",
+        "canonical": "#8fd3ff",
+        "tonalRamp": [
+          "#0a2a3f",
+          "#124466",
+          "#1f6590",
+          "#3a8cbf",
+          "#62b2e6",
+          "#8fd3ff",
+          "#bde5ff",
+          "#e6f6ff"
+        ]
+      },
+      "nebula-rust": {
+        "role": "tertiary",
+        "displayName": "Nebula Rust",
+        "canonical": "#c0703a",
+        "tonalRamp": [
+          "#2a1408",
+          "#4a2516",
+          "#743a1f",
+          "#a0572c",
+          "#c0703a",
+          "#e3a06d",
+          "#f2c08a",
+          "#faead8"
+        ]
+      },
+      "nebula-rust-hi": {
+        "role": "tertiary",
+        "displayName": "Nebula Rust High",
+        "canonical": "#e3a06d",
+        "tonalRamp": [
+          "#2a1408",
+          "#4a2516",
+          "#743a1f",
+          "#a0572c",
+          "#c0703a",
+          "#e3a06d",
+          "#f2c08a",
+          "#faead8"
+        ]
+      },
+      "catalogue-cream": {
+        "role": "neutral",
+        "displayName": "Catalogue Cream",
+        "canonical": "#e9e2cf",
+        "tonalRamp": [
+          "#2c2a23",
+          "#4a463b",
+          "#6d6857",
+          "#928b76",
+          "#b8b09a",
+          "#d4ccb6",
+          "#e9e2cf",
+          "#f7f3ea"
+        ]
+      },
+      "card-ink": {
+        "role": "neutral",
+        "displayName": "Card Ink",
+        "canonical": "#1a1d24",
+        "tonalRamp": [
+          "#0d0f13",
+          "#1a1d24",
+          "#2a2e37",
+          "#3a3f4a",
+          "#5a5f6a",
+          "#80858f",
+          "#aeb2ba",
+          "#e0e2e6"
+        ]
+      },
+      "card-ink-2": {
+        "role": "neutral",
+        "displayName": "Card Ink Secondary",
+        "canonical": "#3a3f4a",
+        "tonalRamp": [
+          "#0d0f13",
+          "#1a1d24",
+          "#2a2e37",
+          "#3a3f4a",
+          "#5a5f6a",
+          "#80858f",
+          "#aeb2ba",
+          "#e0e2e6"
+        ]
+      },
+      "card-muted": {
+        "role": "neutral",
+        "displayName": "Card Muted",
+        "canonical": "#5a5f6a",
+        "tonalRamp": [
+          "#0d0f13",
+          "#1a1d24",
+          "#2a2e37",
+          "#3a3f4a",
+          "#5a5f6a",
+          "#80858f",
+          "#aeb2ba",
+          "#e0e2e6"
+        ]
+      },
+      "header-rule-red": {
+        "role": "tertiary",
+        "displayName": "Header Rule Red",
+        "canonical": "#a8402f",
+        "tonalRamp": [
+          "#2b0f0a",
+          "#4d1c14",
+          "#73291d",
+          "#a8402f",
+          "#c4604d",
+          "#d98b7b",
+          "#ebb9ae",
+          "#f8e5e1"
+        ]
+      },
+      "ruling-blue": {
+        "role": "neutral",
+        "displayName": "Ruling Blue",
+        "canonical": "rgb(52 96 168 / 0.6)",
+        "tonalRamp": [
+          "#0f1d33",
+          "#1c355f",
+          "#284b86",
+          "#3460a8",
+          "#5a7fbd",
+          "#86a2d0",
+          "#b5c6e3",
+          "#e2e9f4"
+        ]
+      },
+      "plate-tone": {
+        "role": "primary",
+        "displayName": "Plate Tone",
+        "canonical": "#5aa2e6",
+        "tonalRamp": [
+          "#0f2a45",
+          "#1b4570",
+          "#2a649c",
+          "#3f83c6",
+          "#5aa2e6",
+          "#86bdee",
+          "#b6d7f5",
+          "#e3effb"
+        ]
+      },
+      "star-white": {
+        "role": "neutral",
+        "displayName": "Star White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#1f2329",
+          "#3b414b",
+          "#5e6672",
+          "#88909c",
+          "#b1b8c2",
+          "#d6dbe1",
+          "#eef1f4",
+          "#ffffff"
+        ]
+      },
+      "frame-black": {
+        "role": "neutral",
+        "displayName": "Frame Black",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "#000000",
+          "#111214",
+          "#23252a",
+          "#3a3d44",
+          "#585c65",
+          "#80848c",
+          "#b0b3b8",
+          "#e3e4e6"
+        ]
+      },
+      "glass-sheen": {
+        "role": "neutral",
+        "displayName": "Glass Sheen",
+        "canonical": "rgb(255 255 255 / 0.07)",
+        "tonalRamp": [
+          "rgb(255 255 255 / 0.01)",
+          "rgb(255 255 255 / 0.02)",
+          "rgb(255 255 255 / 0.035)",
+          "rgb(255 255 255 / 0.05)",
+          "rgb(255 255 255 / 0.07)",
+          "rgb(255 255 255 / 0.1)",
+          "rgb(255 255 255 / 0.14)",
+          "rgb(255 255 255 / 0.2)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The name on the hero plate and project titles; Archivo 800, tight tracking."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Catalogue card titles over the 3px red rule."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Heading inside a ruled card row."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text, tabular numerals."
+      },
+      "role": {
+        "displayName": "Role",
+        "purpose": "The single uppercase line under a display name, cyan ink."
+      },
+      "label": {
+        "displayName": "Label (mono)",
+        "purpose": "Filed things only: field labels and layer names (Interface, Logic, Data)."
+      },
+      "code": {
+        "displayName": "Code (mono)",
+        "purpose": "Routes and model tags."
+      },
+      "display-project": {
+        "displayName": "Display, project",
+        "purpose": "Project name on a project page."
+      },
+      "headline-narrow": {
+        "displayName": "Headline, narrow",
+        "purpose": "Card titles under 520px."
+      },
+      "intro": {
+        "displayName": "Intro",
+        "purpose": "Hero intro paragraph, 46ch."
+      },
+      "tag-large": {
+        "displayName": "Tag, large",
+        "purpose": "Stack names on project pages."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Colophon; hero ring labels under 520px."
+      },
+      "micro": {
+        "displayName": "Micro (mono)",
+        "purpose": "HTTP method cells; vertical layer tabs under 520px."
+      }
+    },
+    "shadows": [
+      {
+        "name": "plate-glow",
+        "value": "0 0 0 1px rgb(143 211 255 / 0.22), 0 40px 90px -30px rgb(47 111 179 / 0.7)",
+        "purpose": "Hero plate on the light box."
+      },
+      {
+        "name": "plate-glow-entry",
+        "value": "0 40px 80px -30px rgb(47 111 179 / 0.65)",
+        "purpose": "Project plates, with a 1px rgb(143 211 255 / 0.22) border."
+      },
+      {
+        "name": "paper-drop",
+        "value": "0 24px 50px -18px rgb(0 0 0 / 0.75)",
+        "purpose": "Every catalogue card."
+      },
+      {
+        "name": "ring-label-halo",
+        "value": "text-shadow: 0 0 2px #05070c, 0 0 10px #05070c, 0 0 18px #05070c",
+        "purpose": "Legibility of hero ring labels over the exposure."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Button fills and the plate brightening."
+      },
+      {
+        "name": "duration-state",
+        "value": "160ms",
+        "purpose": "Button and ring hover changes."
+      },
+      {
+        "name": "duration-expose",
+        "value": "1100ms",
+        "purpose": "Project image brightens from brightness 0.6 to 0.95 when 20% enters view; removed under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "narrow",
+        "value": "960px"
+      },
+      {
+        "name": "phone",
+        "value": "520px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Glass block on cream for the main action in a card.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Open the project</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--glass, #0b1f3a); color: var(--card, #e9e2cf); padding: 0.72rem 1rem 0.64rem; font: 700 1.0625rem/1.6 var(--font, Archivo, system-ui, sans-serif); text-decoration: none; transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), color 160ms; } .ds-btn:hover { background: var(--glow, #2f6fb3); color: #fff; } .ds-btn:focus-visible { outline: 2px solid var(--glass, #0b1f3a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Line Button",
+      "kind": "button",
+      "refersTo": "button-line",
+      "description": "Outline secondary action on cream (live demo, repo, itch.io).",
+      "html": "<a class=\"ds-btn-line\" href=\"#\">Live demo <svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M8 16 17 7M9 7h8v8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\"/></svg></a>",
+      "css": ".ds-btn-line { display: inline-flex; align-items: center; gap: 0.4rem; background: transparent; color: var(--glass, #0b1f3a); box-shadow: inset 0 0 0 2px var(--glass, #0b1f3a); padding: 0.72rem 1rem 0.64rem; font: 700 1.0625rem/1.6 var(--font, Archivo, system-ui, sans-serif); text-decoration: none; transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), color 160ms; } .ds-btn-line:hover { background: var(--glass, #0b1f3a); color: var(--card, #e9e2cf); } .ds-btn-line:focus-visible { outline: 2px solid var(--glass, #0b1f3a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Catalogue Card",
+      "kind": "card",
+      "refersTo": "catalogue-card",
+      "description": "Cream stock with red header rule and ruled, typed fields; holds the primary contact action.",
+      "html": "<section class=\"ds-card\"><h2 class=\"ds-card-title\">Get in touch</h2><dl class=\"ds-fields\"><dt>Email</dt><dd><a href=\"#\">name@example.com</a></dd><dt>GitHub</dt><dd><a href=\"#\">handle</a></dd></dl></section>",
+      "css": ".ds-card { background: var(--card, #e9e2cf); color: var(--card-ink, #1a1d24); padding: 28px; border-radius: 2px; box-shadow: 0 24px 50px -18px rgb(0 0 0 / 0.75); max-width: 440px; font: 400 1.0625rem/1.6 var(--font, Archivo, system-ui, sans-serif); } .ds-card-title { margin: 0; font-weight: 800; font-size: 2rem; line-height: 1.05; letter-spacing: -0.02em; padding-bottom: 12px; border-bottom: 3px solid var(--rule-red, #a8402f); } .ds-fields { margin: 16px 0 0; display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); } .ds-fields dt, .ds-fields dd { margin: 0; padding: 0.55rem 0 0.45rem; border-bottom: 1px solid var(--rule-blue, rgb(52 96 168 / 0.6)); } .ds-fields dt { font: 600 0.75rem var(--mono, 'JetBrains Mono', ui-monospace, monospace); letter-spacing: 0.06em; text-transform: uppercase; color: var(--card-muted, #5a5f6a); display: flex; align-items: center; } .ds-fields dd { font-weight: 700; } .ds-fields a { color: inherit; text-underline-offset: 0.22em; } .ds-fields a:hover { color: var(--rule-red, #a8402f); } .ds-fields a:focus-visible { outline: 2px solid var(--glass, #0b1f3a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Ruled Row",
+      "kind": "custom",
+      "refersTo": "catalogue-card",
+      "description": "A filed card row: mono red layer name (Interface, Logic, Data) in the label column, title and body beside it; the label becomes a vertical tab under 520px.",
+      "html": "<div class=\"ds-layer\"><p class=\"ds-layer-name\">Logic</p><div><h3 class=\"ds-layer-title\">Routes and logic</h3><p class=\"ds-layer-body\">What the API does underneath the page.</p></div></div>",
+      "css": ".ds-layer { background: var(--card, #e9e2cf); color: var(--card-ink, #1a1d24); padding: 16px 28px 28px; border-top: 1px solid var(--rule-blue, rgb(52 96 168 / 0.6)); display: grid; grid-template-columns: 6.25rem minmax(0, 1fr); gap: 0 1rem; font: 400 1.0625rem/1.6 var(--font, Archivo, system-ui, sans-serif); } .ds-layer-name { margin: 0; padding-top: 0.3rem; font: 700 0.75rem var(--mono, 'JetBrains Mono', ui-monospace, monospace); letter-spacing: 0.08em; text-transform: uppercase; color: var(--rule-red, #a8402f); } .ds-layer-title { margin: 0; font-weight: 700; font-size: 1.25rem; line-height: 1.25; } .ds-layer-body { margin: 8px 0 0; color: var(--card-ink-2, #3a3f4a); max-width: 62ch; } @media (max-width: 520px) { .ds-layer { grid-template-columns: 1.1rem minmax(0, 1fr); gap: 0 0.75rem; } .ds-layer-name { writing-mode: vertical-rl; rotate: 180deg; padding: 0; font-size: 0.6875rem; align-self: start; } }"
+    },
+    {
+      "name": "Glass Plate",
+      "kind": "custom",
+      "refersTo": "glass-plate",
+      "description": "Glass-blue holder around a blue-toned image, nothing written on it; brightens when it enters view.",
+      "html": "<figure class=\"ds-glass\"><div class=\"ds-glass-frame\"><div class=\"ds-glass-img\"></div></div></figure>",
+      "css": ".ds-glass { margin: 0; max-width: 520px; background: var(--glass, #0b1f3a); padding: 14px; border: 1px solid rgb(143 211 255 / 0.22); box-shadow: 0 40px 80px -30px rgb(47 111 179 / 0.65); } .ds-glass-frame { position: relative; overflow: hidden; background: #000; aspect-ratio: 16 / 9; } .ds-glass-img { position: absolute; inset: 0; background: linear-gradient(160deg, #d8d8d8, #555); filter: brightness(0.6); transition: filter 1100ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-glass:hover .ds-glass-img { filter: brightness(0.95); } .ds-glass-frame::after { content: ''; position: absolute; inset: 0; background: #5aa2e6; mix-blend-mode: multiply; pointer-events: none; } @media (prefers-reduced-motion: reduce) { .ds-glass-img { transition: none; } }"
+    },
+    {
+      "name": "Hero Link Ring",
+      "kind": "nav",
+      "refersTo": "hero-link-ring",
+      "description": "Ringed star linking to a project plate; dashed until visited, solid after. Hero plate only.",
+      "html": "<div class=\"ds-sky\"><a class=\"ds-ring\" href=\"#\"><svg viewBox=\"0 0 64 64\" aria-hidden=\"true\"><circle cx=\"32\" cy=\"32\" r=\"27\"/><circle cx=\"32\" cy=\"32\" r=\"3.5\" class=\"ds-ring-core\"/></svg><span class=\"ds-ring-label\"><span class=\"ds-ring-n\">01</span>Project</span></a><a class=\"ds-ring is-visited\" href=\"#\"><svg viewBox=\"0 0 64 64\" aria-hidden=\"true\"><circle cx=\"32\" cy=\"32\" r=\"27\"/><circle cx=\"32\" cy=\"32\" r=\"3.5\" class=\"ds-ring-core\"/></svg><span class=\"ds-ring-label\"><span class=\"ds-ring-n\">02</span>Visited</span></a></div>",
+      "css": ".ds-sky { background: radial-gradient(ellipse at 40% 50%, #163258, #071326 70%); padding: 32px; display: grid; gap: 16px; font-family: var(--font, Archivo, system-ui, sans-serif); } .ds-ring { display: flex; align-items: center; text-decoration: none; width: fit-content; } .ds-ring svg { width: 64px; height: 64px; flex: none; overflow: visible; } .ds-ring circle:first-child { fill: none; stroke: var(--ink-cyan, #8fd3ff); stroke-width: 1.5; stroke-dasharray: 5 5; transition: stroke 160ms ease-out; } .ds-ring.is-visited circle:first-child { stroke-dasharray: none; } .ds-ring-core { fill: #fff; } .ds-ring-label { position: relative; margin-left: 34px; color: var(--ink-cyan, #8fd3ff); font-weight: 700; font-size: 1.0625rem; white-space: nowrap; text-shadow: 0 0 2px #05070c, 0 0 10px #05070c, 0 0 18px #05070c; } .ds-ring-label::before { content: ''; position: absolute; top: 50%; right: calc(100% + 6px); width: 24px; height: 1px; background: var(--ink-cyan, #8fd3ff); } .ds-ring-n { font-family: var(--mono, 'JetBrains Mono', ui-monospace, monospace); color: var(--ice, #dfeefc); margin-right: 0.5rem; font-weight: 600; } .ds-ring:hover circle:first-child { stroke: var(--rust-hi, #e3a06d); } .ds-ring:hover .ds-ring-label { text-decoration: underline; } .ds-ring:focus-visible { outline: 2px solid var(--ink-cyan, #8fd3ff); outline-offset: 3px; }"
+    },
+    {
+      "name": "Tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Outlined mono tag for data models; the large variant sets stack names in Archivo 700.",
+      "html": "<ul class=\"ds-tags\"><li><code>Booking</code></li><li><code>Property</code></li><li class=\"ds-tag-lg\">Express</li></ul>",
+      "css": ".ds-tags { list-style: none; margin: 0; padding: 16px; background: var(--card, #e9e2cf); display: flex; flex-wrap: wrap; gap: 0.4rem; } .ds-tags li { font: 400 0.8125rem var(--mono, 'JetBrains Mono', ui-monospace, monospace); color: var(--card-ink, #1a1d24); border: 1px solid var(--card-ink, #1a1d24); padding: 0.1rem 0.45rem; } .ds-tags code { font: inherit; font-weight: 600; } .ds-tags .ds-tag-lg { font: 700 1rem var(--font, Archivo, system-ui, sans-serif); padding: 0.2rem 0.65rem; }"
+    },
+    {
+      "name": "Back Link",
+      "kind": "nav",
+      "refersTo": "back-link",
+      "description": "Return to the home page from a project page.",
+      "html": "<div class=\"ds-dark\"><a class=\"ds-back\" href=\"#\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20 12H5M11 6l-6 6 6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\"/></svg>Back to the home page</a></div>",
+      "css": ".ds-dark { background: var(--void, #05070c); padding: 24px; } .ds-back { display: inline-flex; align-items: center; gap: 0.4rem; font: 700 1.0625rem var(--font, Archivo, system-ui, sans-serif); color: var(--ice-2, #9fb8d3); text-underline-offset: 0.22em; } .ds-back:hover { color: var(--ice, #dfeefc); } .ds-back:focus-visible { outline: 2px solid var(--ink-cyan, #8fd3ff); outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Plate Archive",
+    "overview": "**Creative North Star: \"The Plate Archive\"**\n\nVisually, the site is an observatory's glass plate collection, kept in the dark. Each project is a plate: a deep-blue image lit on a light box, glowing out of a near-black room. Beside every plate sits a cream catalogue card that records what is underneath the picture: interface, logic, data. The metaphor lives only in the visuals; the copy speaks plainly about projects. The picture is what people see; the card is the computing, and the card is where the reading happens.\n\nDensity is low and deliberate. One plate fills the first viewport; project plates stack below it like a drawer, one per entry, each with its card in the next column. Light comes only from the plates and the light box (soft radial blue glows); everything else is the void. The hero sky is procedural SVG (a seeded star field, rust nebula columns mottled by anisotropic noise, a bright warm rim, fine dust), never a stock photograph, and the colophon says it is computer-generated.\n\nThe card side is a paper world: cream stock, a thick red header rule, thin blue ruling between rows, and typed mono field labels in a left column. The two worlds meet but never blend: dark ice-ink type on the void, near-black ink on the cream.",
+    "keyCharacteristics": [
+      "Near-black archive room (#05070c) lit only by blue light-box glows.",
+      "Glass plates: deep glass-blue holders, screenshots toned blue by grayscale plus a multiply wash.",
+      "Cream catalogue cards with a red header rule, blue row ruling and mono field labels.",
+      "Archivo ExtraBold display, tightly tracked; JetBrains Mono for typed field labels and routes.",
+      "One ring geometry, used only on the hero plate as project links: dashed until visited, solid after.",
+      "Square corners (2-3px at most); depth from glow, not from elevation stacks."
+    ],
+    "rules": [
+      {
+        "name": "The Two Stocks Rule",
+        "body": "Dark side and paper side keep their own inks. Ice and cyan inks live on the void; card inks and the red rule live on cream. Never set cream-side ink on the void or ice ink on a card.",
+        "section": "colors"
+      },
+      {
+        "name": "The Blue Plate Rule",
+        "body": "Every project image is toned the same way: grayscale, slight contrast lift, multiplied by the plate tone, inside a glass holder. No full-colour screenshots.",
+        "section": "colors"
+      },
+      {
+        "name": "The Typed Field Rule",
+        "body": "Mono uppercase belongs to things that are filed: the label column of a ruled row, field labels, route methods. It sits beside its content, never as a decorative line set above a heading.",
+        "section": "typography"
+      },
+      {
+        "name": "The Light Box Rule",
+        "body": "Only plates emit light. Blue glow belongs under glass; cards get the dark paper drop; nothing else glows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do tone every project image as a blue plate: grayscale(1) contrast(1.08), multiplied by the plate tone, in a glass holder.",
+      "Do put primary actions (email, LinkedIn, GitHub) on a cream catalogue card with typed field labels.",
+      "Do separate card rows with 1px ruling blue and lead each with a mono red layer name in a label column.",
+      "Do keep the 3px red rule under every card title.",
+      "Do keep the ring geometry to the hero plate, dashed for unvisited and solid for visited links.",
+      "Do keep the sky imagery procedural and say so in the colophon.",
+      "Do respect reduced motion: no smooth scroll and no plate brightening transition."
+    ],
+    "donts": [
+      "Don't put annotation rings or numbered legends on project plates; rings mark hero links only.",
+      "Don't give project cards a glow or make them dark glass cards; cards are cream paper with a dark drop.",
+      "Don't round corners beyond 3px or add pills.",
+      "Don't set a mono uppercase line above a heading as a kicker or eyebrow.",
+      "Don't use unicode arrows or glyph icons; use the drawn stroke icons.",
+      "Don't use plate, archive, exposure or similar observatory jargon in site copy (user decision: plain words everywhere). Say project; the plate idea lives in the visuals only.",
+      "Don't print labels, stamps or captions on the plates themselves.",
+      "Don't introduce a second warm accent; rust and the header red cover every warm role."
+    ]
+  }
+}
