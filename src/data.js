@@ -122,8 +122,10 @@ const month = (ym) => `${MONTHS[+ym.slice(5, 7) - 1]} ${ym.slice(0, 4)}`
 
 // A synced repo's dates are when the repo was created and last pushed, not necessarily when the work happened.
 export function repoToProject(r) {
-  const start = r.created.slice(0, 7)
+  // A fork's `created` is the day it was forked, which can be after its last push and says nothing
+  // about the work, so then the last push is used for both ends.
   const end = r.pushed.slice(0, 7)
+  const start = r.created.slice(0, 7) <= end ? r.created.slice(0, 7) : end
   return {
     slug: r.name.toLowerCase(),
     repo: r.name,
