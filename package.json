@@ -4,7 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "sync": "node scripts/sync-repos.mjs",
+    "predev": "node scripts/sync-repos.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/sync-repos.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },

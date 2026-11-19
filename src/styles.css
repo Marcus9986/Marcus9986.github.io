@@ -266,8 +266,9 @@ table { border-collapse: collapse; }
 .card .btn:hover, .btn:hover { background: var(--glow); color: #fff; }
 .btn--line { background: transparent; color: var(--glass); box-shadow: inset 0 0 0 2px var(--glass); }
 .card .btn--line:hover { background: var(--glass); color: var(--card); }
-.btn--play { margin-top: 16px; background: var(--rule-red); }
 
+
+.btn--play { margin-top: 16px; background: var(--rule-red); }
 .embed { margin-top: 16px; aspect-ratio: 1480 / 800; border: 2px solid var(--glass); background: var(--void); }
 .embed iframe { width: 100%; height: 100%; border: 0; display: block; }
 
@@ -292,6 +293,7 @@ table { border-collapse: collapse; }
 }
 .timeline__item:first-child .when__node { background: var(--ink-cyan); }
 .timeline .entry { max-width: none; }
+.tags--synced { margin-top: 18px; }
 .glass__sky { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; }
 
 /* ---------- Close ---------- */

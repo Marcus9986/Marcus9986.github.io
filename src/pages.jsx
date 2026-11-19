@@ -109,11 +109,21 @@ function ProjectEntry({ project }) {
       <Glass project={project} />
       <div className="card card--entry">
         <h2 id={`t-${project.slug}`} className="card__title">{project.name}</h2>
-        <p className="card__tagline">{project.tagline}</p>
-        {layers.map((l) => <Layer key={l.id} layer={l} band={project.bands[l.id]} />)}
+        {project.tagline && <p className="card__tagline">{project.tagline}</p>}
+        {project.synced ? (
+          project.stack.length > 0 && <ul className="tags tags--synced">{project.stack.map((t) => <li key={t}>{t}</li>)}</ul>
+        ) : (
+          layers.map((l) => <Layer key={l.id} layer={l} band={project.bands[l.id]} />)
+        )}
         <p className="actions">
-          <a className="btn" href={project.href}>Open the project<span className="vh">: {project.name}</span></a>
-          {project.links.slice(0, 1).map((l) => <Ext key={l.href} href={l.href} className="btn btn--line">{l.label}</Ext>)}
+          {project.synced ? (
+            project.links.map((l, i) => <Ext key={l.href} href={l.href} className={`btn ${i ? 'btn--line' : ''}`}>{l.label}</Ext>)
+          ) : (
+            <>
+              {project.href && <a className="btn" href={project.href}>Open the project<span className="vh">: {project.name}</span></a>}
+              {(project.links || []).slice(0, project.href ? 1 : 2).map((l, i) => <Ext key={l.href} href={l.href} className={`btn ${project.href || i ? 'btn--line' : ''}`}>{l.label}</Ext>)}
+            </>
+          )}
         </p>
       </div>
     </article>
