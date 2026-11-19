@@ -217,7 +217,9 @@ function GameEmbed({ id }) {
 
 export function ProjectPage({ slug }) {
   const p = projects.find((x) => x.slug === slug)
-  useEffect(() => markVisited(slug), [slug])
+  useEffect(() => { if (p) markVisited(slug) }, [p, slug])
+  // The project is hidden (its repo lost the `portfolio` topic) but its page folder remains.
+  if (!p) { window.location.replace('/'); return null }
   return (
     <>
       <a className="skip" href="#details">Skip to the details</a>
