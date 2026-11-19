@@ -16,7 +16,6 @@ colors:
   card-muted: "#5a5f6a"
   header-rule-red: "#a8402f"
   ruling-blue: "rgb(52 96 168 / 0.6)"
-  plate-tone: "#5aa2e6"
   star-white: "#ffffff"
   frame-black: "#000000"
   glass-sheen: "rgb(255 255 255 / 0.07)"
@@ -147,7 +146,7 @@ The card side is a paper world: cream stock, a thick red header rule, thin blue 
 
 **Key Characteristics:**
 - Near-black archive room (#05070c) lit only by blue light-box glows.
-- Glass plates: deep glass-blue holders, screenshots toned blue by grayscale plus a multiply wash.
+- Glass plates: deep glass-blue holders around full-colour screenshots.
 - Cream catalogue cards with a red header rule, blue row ruling and mono field labels.
 - Archivo ExtraBold display, tightly tracked; JetBrains Mono for typed field labels and routes.
 - One ring geometry, used only on the hero plate as project links: dashed until visited, solid after.
@@ -174,7 +173,6 @@ A cold blue-black palette with one warm nebula accent and a paper stock that car
 - **Catalogue Cream** (catalogue-cream): card stock; also the text colour on glass buttons and the skip link background.
 - **Card Ink, Card Ink 2, Card Muted** (card-ink, card-ink-2, card-muted): headings, body and field labels on cream, in that order of weight.
 - **Ruling Blue** (ruling-blue): 1px rules between card rows, field rows and route rows.
-- **Plate Tone** (plate-tone): the multiply wash over grayscale screenshots that makes every project image read as a blue plate.
 - **Star White** (star-white): star cores (hero ring cores, the brightest points of the sky) and button text on the glow hover. Nowhere else.
 - **Frame Black** (frame-black): the ground inside a plate frame, behind the toned image.
 - **Glass Sheen** (glass-sheen): a 125deg white-to-transparent wash over the hero plate, ending at 35%, so it reads as glass.
@@ -182,7 +180,7 @@ A cold blue-black palette with one warm nebula accent and a paper stock that car
 ### Named Rules
 **The Two Stocks Rule.** Dark side and paper side keep their own inks. Ice and cyan inks live on the void; card inks and the red rule live on cream. Never set cream-side ink on the void or ice ink on a card.
 
-**The Blue Plate Rule.** Every project image is toned the same way: grayscale, slight contrast lift, multiplied by the plate tone, inside a glass holder. No full-colour screenshots.
+**The Blue Plate Rule.** Every project image sits in a glass holder, in full colour. Marcus asked for the blue tone over screenshots to be removed, so don't tone, tint or desaturate them.
 
 ## Typography
 
@@ -267,7 +265,7 @@ Drawn 24px-grid strokes at 2.25 width with square caps, sized 1.05em, in current
 ## Do's and Don'ts
 
 ### Do:
-- **Do** tone every project image as a blue plate: grayscale(1) contrast(1.08), multiplied by the plate tone, in a glass holder.
+- **Do** show every project image in full colour inside a glass holder; never tint or desaturate it.
 - **Do** put primary actions (email, LinkedIn, GitHub) on a cream catalogue card with typed field labels.
 - **Do** separate card rows with 1px ruling blue and lead each with a mono red layer name in a label column.
 - **Do** keep the 3px red rule under every card title.

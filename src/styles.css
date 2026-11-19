@@ -223,14 +223,10 @@ table { border-collapse: collapse; }
 }
 .glass__frame { position: relative; overflow: hidden; background: #000; }
 .glass__frame img {
-  filter: grayscale(1) contrast(1.08) brightness(0.95);
+  filter: brightness(1);
   transition: filter 1100ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.glass__frame::after { /* the plate's blue tone */
-  content: ""; position: absolute; inset: 0;
-  background: #5aa2e6; mix-blend-mode: multiply; pointer-events: none;
-}
-.js .glass:not(.is-lit) .glass__frame img { filter: grayscale(1) contrast(1.08) brightness(0.6); }
+.js .glass:not(.is-lit) .glass__frame img { filter: brightness(0.6); }
 @media (prefers-reduced-motion: reduce) {
   .glass__frame img { transition: none; }
 }
@@ -252,6 +248,8 @@ table { border-collapse: collapse; }
 .card--entry { container-type: inline-size; }
 /* In a narrow card (whatever the screen width), stack each route's methods above its path. */
 @container (max-width: 480px) {
+  .layer { grid-template-columns: 1.1rem minmax(0, 1fr); gap: 0 0.75rem; }
+  .layer__name { writing-mode: vertical-rl; rotate: 180deg; padding: 0; font-size: 0.6875rem; align-self: start; }
   .routes tr { display: grid; border-bottom: 1px solid var(--rule-blue); padding: 0.3rem 0 0.25rem; }
   .routes td { border-bottom: 0; padding: 0; }
   .routes code { overflow-wrap: anywhere; }
