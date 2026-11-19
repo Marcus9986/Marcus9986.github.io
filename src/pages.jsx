@@ -144,14 +144,15 @@ function Footer() {
 }
 
 // Ringed stars on the hero: each links to a project below. Dashed until opened, solid after.
-// Star positions on the hero, used in timeline order (newest first). Projects beyond the last
-// slot get no star; they're still listed below. Add a slot here if you want one for them.
+// Star positions on the hero, used in timeline order (newest first). Each star has its own row,
+// so labels can't collide; stars on the right put their label to the left (`flip`). Projects beyond
+// the last slot get no star (they're still listed below); add a row here, keeping rows ~9% apart.
 const STAR_SLOTS = [
-  { left: '70%', top: '17%', flip: true },
-  { left: '52%', top: '38%' },
-  { left: '86%', top: '36%', flip: true },
-  { left: '38%', top: '12%' },
-  { left: '58%', top: '9%' },
+  { left: '72%', top: '6%', flip: true },
+  { left: '34%', top: '15%' },
+  { left: '86%', top: '24%', flip: true },
+  { left: '18%', top: '33%' },
+  { left: '62%', top: '42%', flip: true },
 ]
 
 export function Home() {

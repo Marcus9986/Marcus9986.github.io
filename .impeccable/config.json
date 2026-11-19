@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font-size",
+        "value": "2.25rem",
+        "createdAt": "2026-11-19T02:44:12.955Z",
+        "reason": "Claude: fluid minimum for long project names on project pages (hero__name--project), added to stop titles running under the screenshot"
+      }
+    ]
+  }
+}
