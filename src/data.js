@@ -140,15 +140,19 @@ export function repoToProject(r) {
 }
 
 // Hand-written fields win; the synced repo named in `repo` fills in whatever the entry leaves out.
+// Entries without `repo` (e.g. a private project) always show and must have their own `when`.
 // Entries with `bands` get the full card and a project page; the rest use the simple card.
 export function mergeProjects(handWritten, repos) {
   const byName = new Map(repos.map((r) => [r.name, r]))
   const full = (p) => ({ href: PAGES.has(p.slug) ? `/projects/${p.slug}/` : null, ...p, synced: false })
-  const merged = handWritten.map((p) => {
-    const r = p.repo && byName.get(p.repo)
-    const base = r ? { ...repoToProject(r), ...p } : p
-    return base.bands ? full(base) : { ...base, synced: true }
-  })
+  const merged = handWritten
+    // The `portfolio` topic is the on/off switch: an entry linked to a repo shows only while that
+    // repo is tagged. Your text stays in the file, so re-tagging brings it back.
+    .filter((p) => !p.repo || byName.has(p.repo))
+    .map((p) => {
+      const base = p.repo ? { ...repoToProject(byName.get(p.repo)), ...p } : p
+      return base.bands ? full(base) : { ...base, synced: true }
+    })
   const covered = new Set(handWritten.map((p) => p.repo).filter(Boolean))
   return [...merged, ...repos.filter((r) => !covered.has(r.name)).map(repoToProject)]
     .sort((a, b) => (b.when.end ?? '9999').localeCompare(a.when.end ?? '9999')) // newest first; ongoing on top

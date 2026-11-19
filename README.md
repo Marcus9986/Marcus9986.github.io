@@ -41,6 +41,7 @@ Every word and link on the site comes from `src/data.js`, `src/drafts.js` and `s
   - **Every field you write wins.**
   - Any field you leave out (`name`, `tagline`, `when`, `stack`, `links`) is filled from GitHub and stays current.
 - **Simple and full cards.** A tagged repo with no entry gets a simple card: description, tags, dates and a GitHub link. An entry with `bands` (the Interface / Logic / Data rows) gets the full card. It gets its own page too if `projects/<slug>/index.html` exists.
+- **The topic is the on/off switch.** An entry with `repo` set only appears while that repo has the `portfolio` topic, even one you wrote entirely by hand. Remove the topic and the project disappears, and its page redirects to the home page. Your text stays in the file, so adding the topic back restores it. Entries without `repo` (like Rouge Valley, whose repo is private) always show and need their own `when`.
 - **Order.** Projects are listed newest first by `when.end`, and `end: null` (ongoing) goes on top. The first five also get a star on the home page.
 
 ## Adding or updating projects
@@ -100,7 +101,7 @@ Every word and link on the site comes from `src/data.js`, `src/drafts.js` and `s
 
 | To… | Do this |
 |---|---|
-| Hide a repo | Remove its `portfolio` topic |
+| Hide a project linked to a repo | Remove the repo's `portfolio` topic; add it back to restore it |
 | Let GitHub keep a field current | Delete that field from the hand-written entry |
 | Change contact details | Edit `contact` at the top of `src/data.js` |
 | Change colours, fonts or spacing | Edit the variables at the top of `src/styles.css` |
