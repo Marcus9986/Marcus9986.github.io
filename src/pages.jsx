@@ -155,7 +155,145 @@ const STAR_SLOTS = [
   { left: '62%', top: '42%', flip: true },
 ]
 
+// Which project is in view: the last one whose top has passed 45% of the screen (its dot glows).
+function useCurrentProject() {
+  const areaRef = useRef(null)
+  const [active, setActive] = useState(0)
+  useEffect(() => {
+    let raf = 0
+    const pick = () => {
+      raf = 0
+      const items = areaRef.current?.querySelectorAll('.timeline__item') || []
+      const line = window.innerHeight * 0.45
+      let i = 0
+      items.forEach((li, k) => { if (li.getBoundingClientRect().top <= line) i = k })
+      setActive(i)
+    }
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(pick) }
+    pick()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); if (raf) cancelAnimationFrame(raf) }
+  }, [])
+  return { areaRef, active }
+}
+
+// The rocket rides the timeline rail at the height you've scrolled to (45% down the screen).
+//   landed    sitting on a dot while that dot is near the 45% line (the rail's two ends count too)
+//   launching leaving a dot: lifts off, then flies one loop around it
+//   flying    following the scroll line, floating and swaying
+//   landing   easing down onto the next dot the line reaches
+// Decorative and hidden from screen readers. With reduced motion: no loop, no float, no easing.
+const ROCKET = { SNAP_IN: 60, SNAP_OUT: 80, LIFT: 18, LAUNCH_MS: 1100, FOLLOW: 0.12, SETTLE: 0.16 }
+const easeInOut = (t) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2)
+
+function Rocket({ areaRef }) {
+  const el = useRef(null)
+  useEffect(() => {
+    const area = areaRef.current, rocket = el.current
+    if (!area || !rocket) return
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const s = { mode: null, node: 0, x: 0, y: 0, a: 0, t0: 0 }
+    let raf = 0
+
+    const frame = (now) => {
+      raf = requestAnimationFrame(frame)
+      const box = area.getBoundingClientRect()
+      const nodes = [...area.querySelectorAll('.when__node')].map((n) => {
+        const r = n.getBoundingClientRect()
+        return { x: r.left - box.left + r.width / 2, y: r.top - box.top + r.height / 2, r: r.height / 2 }
+      })
+      if (!nodes.length) return
+      const h = rocket.offsetHeight
+      const line = window.innerHeight * 0.45 - box.top
+      const last = nodes.length - 1
+      const rm = reduce.matches
+      // Rocket centre when sitting on dot i: its base just above the dot.
+      const seat = (i) => ({ x: nodes[i].x, y: nodes[i].y - nodes[i].r - h / 2 - 1 })
+      const dist = (i) => Math.abs(line - nodes[i].y)
+      // The dot to land on: one near the line, or an end of the rail once the line is past it.
+      const target = () => {
+        if (line <= nodes[0].y) return 0
+        if (line >= nodes[last].y) return last
+        return nodes.findIndex((_, k) => dist(k) < ROCKET.SNAP_IN)
+      }
+      const set = (mode) => { s.mode = mode; s.t0 = now; rocket.dataset.mode = mode }
+
+      if (s.mode === null) { s.node = Math.max(target(), 0); Object.assign(s, seat(s.node)); set('landed') }
+
+      if (s.mode === 'landed') {
+        Object.assign(s, seat(s.node)); s.a = 0
+        const leaving = s.node === 0 ? line > nodes[0].y + ROCKET.SNAP_OUT
+          : s.node === last ? line < nodes[last].y - ROCKET.SNAP_OUT
+          : dist(s.node) > ROCKET.SNAP_OUT
+        if (leaving) set(rm ? 'flying' : 'launching')
+      } else if (s.mode === 'launching') {
+        const k = Math.min((now - s.t0) / ROCKET.LAUNCH_MS, 1)
+        const n = nodes[s.node], start = seat(s.node)
+        if (k < 0.2) {
+          // Lift-off: straight up.
+          s.x = start.x; s.y = start.y - ROCKET.LIFT * easeInOut(k / 0.2); s.a = 0
+        } else {
+          // Then one anticlockwise loop that starts around the dot and drifts toward the scroll
+          // line as it goes, so a fast scroll doesn't leave the rocket looping off-screen.
+          // Nose points the way it's travelling.
+          const p = easeInOut((k - 0.2) / 0.8)
+          const R = n.y - (start.y - ROCKET.LIFT)
+          const lineY = Math.min(Math.max(line, nodes[0].y), nodes[last].y)
+          const cy = n.y + (lineY + R - n.y) * p // loop ends with the rocket on the line
+          const th = -Math.PI / 2 - 2 * Math.PI * p
+          s.x = n.x + R * Math.cos(th); s.y = cy + R * Math.sin(th)
+          s.a = ((th + Math.PI / 2) * 180) / Math.PI
+        }
+        if (k >= 1) { s.a = 0; set('flying') }
+      } else if (s.mode === 'flying') {
+        const ty = Math.min(Math.max(line, nodes[0].y), nodes[last].y)
+        const vy = (ty - s.y) * (rm ? 1 : ROCKET.FOLLOW)
+        s.y += vy; s.x += (nodes[0].x - s.x) * (rm ? 1 : 0.2)
+        // Lean a little into the direction of travel.
+        const lean = Math.max(-18, Math.min(18, vy * 1.5))
+        s.a += (lean - s.a) * 0.15
+        const i = target()
+        if (i >= 0 && !(i === s.node && now - s.t0 < 400)) { s.node = i; set('landing') }
+      } else if (s.mode === 'landing') {
+        const t = seat(s.node), f = rm ? 1 : ROCKET.SETTLE
+        s.x += (t.x - s.x) * f; s.y += (t.y - s.y) * f; s.a *= 0.75
+        if (Math.abs(t.y - s.y) < 0.6 && Math.abs(t.x - s.x) < 0.6) set('landed')
+        else if (target() !== s.node) set('flying')
+      }
+
+      // Float: a gentle bob and sway while flying (render only, so landings stay exact).
+      const floating = s.mode === 'flying' && !rm
+      const fx = floating ? Math.sin(now / 650) * 3 : 0
+      const fy = floating ? Math.sin(now / 460) * 2.5 : 0
+      const fa = floating ? Math.sin(now / 820) * 6 : 0
+      rocket.style.transform = `translate(${s.x + fx}px, ${s.y + fy}px) translate(-50%, -50%) rotate(${s.a + fa}deg)`
+    }
+
+    // Only animate while the timeline is on screen.
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !raf) raf = requestAnimationFrame(frame)
+      if (!e.isIntersecting && raf) { cancelAnimationFrame(raf); raf = 0 }
+    }, { rootMargin: '200px 0px' })
+    io.observe(area)
+    return () => { io.disconnect(); if (raf) cancelAnimationFrame(raf) }
+  }, [areaRef])
+
+  return (
+    <div className="rocket" ref={el} aria-hidden="true">
+      <svg viewBox="0 0 20 40" focusable="false">
+        <path className="rocket__flame" d="M7 30c0 4 1.5 7 3 9 1.5-2 3-5 3-9z" />
+        <path className="rocket__fin" d="M5 20 1 27v3l5-3zM15 20l4 7v3l-5-3z" />
+        <path className="rocket__body" d="M10 1c3.5 3 5 8 5 14v12H5V15C5 9 6.5 4 10 1z" />
+        <circle className="rocket__window" cx="10" cy="14" r="2.6" />
+        <path className="rocket__fin" d="M8 27h4v3H8z" />
+      </svg>
+    </div>
+  )
+}
+
 export function Home() {
+  const rocket = useCurrentProject()
   const [visited, setVisited] = useState(() => new Set())
   useEffect(() => setVisited(getVisited()), [])
   return (
@@ -190,14 +328,17 @@ export function Home() {
       </header>
       <main id="projects" className="drawer" tabIndex="-1">
         <h2 className="vh">Projects</h2>
+        <div className="timeline-area" ref={rocket.areaRef}>
+        <Rocket areaRef={rocket.areaRef} />
         <ol className="timeline">
-          {projects.map((p) => (
-            <li key={p.slug} className="timeline__item">
+          {projects.map((p, i) => (
+            <li key={p.slug} className={`timeline__item ${i === rocket.active ? 'is-current' : ''}`}>
               <p className="when"><span className="when__node" aria-hidden="true" /><time dateTime={p.when.start}>{p.when.label}</time></p>
               <ProjectEntry project={p} />
             </li>
           ))}
         </ol>
+        </div>
       </main>
       <Footer />
     </>
