@@ -1,12 +1,24 @@
 // Every fact here comes from the project repos or from Marcus. Don't add claims that can't be checked.
+import syncedRepos from './repos.json'
+import { drafts } from './drafts.js'
+
+// Slugs that have a page folder (projects/<slug>/index.html); found at build time.
+const PAGES = new Set(Object.keys(import.meta.glob('/projects/*/index.html')).map((k) => k.split('/')[2]))
 //
 // Adding a project:
 //   1. Add an entry to `projectList` below (copy an existing one). `when.end` (YYYY-MM) sets its
 //      place on the timeline; newest is shown first. Use `end: null` for work that's still ongoing.
 //   2. Put a screenshot in public/img/ and point `image` at it (optional: without one, the project
 //      gets a generated star-field plate).
-//   3. Copy projects/animutate/index.html to projects/<slug>/index.html and change the <title>,
+//   3. Copy projects/rouge-valley/index.html to projects/<slug>/index.html and change the <title>,
 //      the description and data-page="<slug>". The build picks up the folder automatically.
+//
+// GitHub sync: public repos tagged with the `portfolio` topic are saved to src/repos.json
+// (scripts/sync-repos.mjs, run before every build and daily on GitHub Actions) and added to the
+// timeline. A repo with no entry here gets a simple card: description, language, topics, dates
+// and a GitHub link. To add hand-written parts, write an entry here with `repo` set to the repo's
+// name: every field you write wins, and any field you leave out (name, tagline, when, stack,
+// links) is filled from GitHub. Give it `bands` and a page folder for the full card and page.
 
 export const contact = {
   email: 'marcussecord@gmail.com',
@@ -65,10 +77,10 @@ const projectList = [
   },
   {
     slug: 'animutate',
+    repo: 'Animutate-main',
     when: { start: '2023-02', end: '2024-06', label: 'Feb 2023 – Jun 2024' },
     name: 'Animutate',
     tagline: 'A 2D platformer where you change animal to get through',
-    href: '/projects/animutate/',
     embed: '7705905', // itch.io embed-upload id
     image: { src: '/img/animutate.webp', alt: 'Animutate title screen: hand-drawn lettering with a hare, frog and fish over a teal pixel-art forest, with Play and Quit buttons.', width: 1200, height: 747 },
     bands: {
@@ -105,7 +117,41 @@ const projectList = [
   },
 ]
 
-// Newest first; ongoing work (end: null) sorts to the top.
-export const projects = projectList
-  .map((p) => ({ href: `/projects/${p.slug}/`, ...p }))
-  .sort((a, b) => (b.when.end ?? '9999').localeCompare(a.when.end ?? '9999'))
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const month = (ym) => `${MONTHS[+ym.slice(5, 7) - 1]} ${ym.slice(0, 4)}`
+
+// A synced repo's dates are when the repo was created and last pushed, not necessarily when the work happened.
+export function repoToProject(r) {
+  const start = r.created.slice(0, 7)
+  const end = r.pushed.slice(0, 7)
+  return {
+    slug: r.name.toLowerCase(),
+    repo: r.name,
+    synced: true,
+    name: r.name.replace(/[-_]+/g, ' '),
+    tagline: r.description || '',
+    when: { start, end, label: start === end ? month(end) : `${month(start)} – ${month(end)}` },
+    stack: [r.language, ...r.topics].filter(Boolean),
+    links: [
+      ...(r.homepage ? [{ label: 'Open the live site', href: r.homepage, external: true }] : []),
+      { label: 'View on GitHub', href: r.url, external: true },
+    ],
+  }
+}
+
+// Hand-written fields win; the synced repo named in `repo` fills in whatever the entry leaves out.
+// Entries with `bands` get the full card and a project page; the rest use the simple card.
+export function mergeProjects(handWritten, repos) {
+  const byName = new Map(repos.map((r) => [r.name, r]))
+  const full = (p) => ({ href: PAGES.has(p.slug) ? `/projects/${p.slug}/` : null, ...p, synced: false })
+  const merged = handWritten.map((p) => {
+    const r = p.repo && byName.get(p.repo)
+    const base = r ? { ...repoToProject(r), ...p } : p
+    return base.bands ? full(base) : { ...base, synced: true }
+  })
+  const covered = new Set(handWritten.map((p) => p.repo).filter(Boolean))
+  return [...merged, ...repos.filter((r) => !covered.has(r.name)).map(repoToProject)]
+    .sort((a, b) => (b.when.end ?? '9999').localeCompare(a.when.end ?? '9999')) // newest first; ongoing on top
+}
+
+export const projects = mergeProjects([...projectList, ...drafts], syncedRepos)

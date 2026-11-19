@@ -36,7 +36,6 @@ He is a developer focused on backend and web work who also ships games. Animutat
 
 - Contact email: `marcussecord@gmail.com`, which may be shown publicly on the site.
 - External profiles: GitHub `https://github.com/Marcus9986`, LinkedIn `https://www.linkedin.com/in/marcus-secord`, itch.io `https://marcus9986.itch.io/`.
-- Animutate is embedded from itch.io (embed id `7705905`). If the embed fails, the page links to the game on itch.io.
 
 ## Brand Commitments
 
@@ -46,7 +45,7 @@ He is a developer focused on backend and web work who also ships games. Animutat
 ## Evidence on Hand
 
 - **Rouge Valley Conservation Centre site** (Queen's Web Development Club group project, Next.js + Express + MongoDB). Marcus wrote most of the Express REST API (`src/server/app.js`, 18 of 20 commits): CRUD routes for alerts, education programs, kids' programs, special events and general content, MongoDB/Mongoose models and the database connection, Cloudinary photo uploads, and the content dashboards. The JWT admin login was written by a teammate, so don't credit it to Marcus. The repo is private. The public demo, a stripped-down version without the dashboard or outdated information, is at `https://ws26t04-rougevalley-test.vercel.app/`.
-- **Animutate**: a Unity (C#) game on itch.io, with a public repo at `https://github.com/Marcus9986/Animutate-main` (all 30 commits by Marcus) and a screenshot at `img/Animutate.png`.
+- **Animutate**: a Unity (C#) game on itch.io (`https://marcus9986.itch.io/animutate`), with a public repo at `https://github.com/Marcus9986/Animutate-main` (all 30 commits by Marcus). Made Feb 2023 – Jun 2024. On the site its hand-written entry is merged with its synced repo; hand-written fields win. Its itch.io embed id is `7705905`.
 - The old pages (rental mockup, loading screen, JS test, projects list) don't carry over to the new site.
 - **Absent, do not fabricate**: testimonials, employers and metrics. Leave them off the site until real ones exist, with no placeholder slots. The skills list is deferred, so leave it off for now. Don't show the graduation year.
 

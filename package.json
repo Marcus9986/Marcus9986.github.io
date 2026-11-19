@@ -4,7 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "sync": "node scripts/sync-repos.mjs",
+    "predev": "node scripts/sync-repos.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/sync-repos.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -13,6 +16,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^1.10.0",
     "@vitejs/plugin-react": "^4.3.4",
     "vite": "^6.0.7"
   }
