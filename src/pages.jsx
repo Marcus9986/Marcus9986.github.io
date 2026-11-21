@@ -282,7 +282,25 @@ const MOON_ART = [
   '...mmsmmsssss...',
   '.....ssssss.....',
 ]
-const MOON_INK = { h: { fill: '#eef3f8' }, m: { fill: '#b9c6d4' }, s: { fill: '#7d8ea3' }, c: { fill: '#8d9db1' } }
+// Each timeline dot is a small planet: 7x7 pixels (sized in styles.css), lit from the top left.
+// h highlight, a surface, c surface detail (bands, craters), s shadow side.
+const DOT_ART = [
+  '..hha..',
+  '.haaas.',
+  'haccaas',
+  'aaacass',
+  'aaaaass',
+  '.acass.',
+  '..ass..',
+]
+const DOT_INKS = [
+  { h: '#f0a37a', a: '#c0703a', c: '#8f4a26', s: '#6b3418' }, // rusty desert world
+  { h: '#f3e2b8', a: '#d4b47c', c: '#a8834e', s: '#7a5c34' }, // banded gas giant
+  { h: '#e6f6ff', a: '#8fd3ff', c: '#5aa6d6', s: '#2f6f9e' }, // ice world
+  { h: '#d9c2f5', a: '#9b74cf', c: '#6e4ea3', s: '#4a3373' }, // violet world
+  { h: '#c8efb4', a: '#6fb35a', c: '#4a8a3c', s: '#2f5e27' }, // jungle world
+].map((pal) => Object.fromEntries(Object.entries(pal).map(([k, fill]) => [k, { fill }])))
+const MOON_INK ={ h: { fill: '#eef3f8' }, m: { fill: '#b9c6d4' }, s: { fill: '#7d8ea3' }, c: { fill: '#8d9db1' } }
 
 function Rocket({ areaRef }) {
   const el = useRef(null)
@@ -613,7 +631,7 @@ export function Home() {
         <ol className="timeline">
           {projects.map((p, i) => (
             <li key={p.slug} className={`timeline__item ${i === rocket.active ? 'is-current' : ''}`}>
-              <p className="when"><span className="when__node" aria-hidden="true" /><time dateTime={p.when.start}>{p.when.label}</time></p>
+              <p className="when"><span className="when__node" aria-hidden="true"><PixelArt rows={DOT_ART} ink={DOT_INKS[i % DOT_INKS.length]} /></span><time dateTime={p.when.start}>{p.when.label}</time></p>
               <ProjectEntry project={p} />
             </li>
           ))}

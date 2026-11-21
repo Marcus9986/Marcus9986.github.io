@@ -287,18 +287,21 @@ table { border-collapse: collapse; }
 .timeline__item { position: relative; }
 .when {
   position: absolute; left: -168px; top: 0; width: 150px;
-  display: grid; grid-template-columns: 56px minmax(0, 1fr); align-items: start;
+  display: grid; grid-template-columns: 56px minmax(0, 1fr); align-items: center;
   font-family: var(--mono); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.04em;
   color: var(--ice); line-height: 1.35;
 }
+/* Each dot is a small pixel planet (DOT_ART in pages.jsx, 7x7 pixels at 4px; 3px on phones),
+   dimmed until it's the current project. Its centre sits on the rail. */
 .when__node {
-  justify-self: center; margin-top: 2px;
-  width: 14px; height: 14px; border-radius: 50%;
-  border: 1.5px solid var(--ink-cyan); background: var(--void);
-  box-shadow: 0 0 0 4px var(--void);
+  justify-self: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--void); box-shadow: 0 0 0 4px var(--void); /* masks the rail behind it */
+  filter: saturate(0.55) brightness(0.7);
+  transition: filter 300ms ease-out, box-shadow 300ms ease-out;
 }
-.when__node { transition: background-color 300ms ease-out, box-shadow 300ms ease-out; }
-.timeline__item.is-current .when__node { background: var(--ink-cyan); box-shadow: 0 0 0 4px var(--void), 0 0 14px 2px rgb(143 211 255 / 0.55); }
+.when__node svg { display: block; width: 100%; height: 100%; }
+.timeline__item.is-current .when__node { filter: none; box-shadow: 0 0 0 4px var(--void), 0 0 18px 3px rgb(143 211 255 / 0.55); }
 
 /* The rocket: rides the rail at the scroll position and lands on dots (Rocket in pages.jsx). */
 .timeline-area { position: relative; }
@@ -395,8 +398,7 @@ table { border-collapse: collapse; }
   .timeline { padding-left: 28px; }
   .timeline::before { left: 6px; bottom: 88px; }
   .when { position: static; width: auto; margin: 0 0 12px -28px; grid-template-columns: 28px minmax(0, 1fr); }
-  .when__node { justify-self: start; margin-left: -1px; }
-  .rocket { width: 14px; height: 28px; }
+  .when__node { justify-self: start; width: 21px; height: 21px; margin-left: -4px; } /* centre on the 6.5px rail */
   .moon, .earth { width: 96px; }
   .glass { position: static; }
   .lightbox__inner--project { grid-template-columns: minmax(0, 1fr); gap: 28px; }
