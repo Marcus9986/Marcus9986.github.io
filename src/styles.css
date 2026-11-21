@@ -304,15 +304,17 @@ table { border-collapse: collapse; }
 .timeline-area { position: relative; }
 .rocket {
   position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none;
-  width: 18px; height: 36px; will-change: transform;
+  width: 16px; height: 32px; will-change: transform; /* 8x16 pixel art at 2px per pixel */
   filter: drop-shadow(0 4px 8px rgb(0 0 0 / 0.5));
 }
 .rocket svg { width: 100%; height: 100%; display: block; overflow: visible; }
 .rocket__body { fill: var(--ice); }
-.rocket__window { fill: var(--glow); stroke: var(--ink-cyan); stroke-width: 1; }
+.rocket__shade { fill: var(--ice); filter: brightness(0.72); }
+.rocket__window { fill: var(--glow); }
+.rocket__frame { fill: var(--ink-cyan); }
 .rocket__fin { fill: var(--rust); }
 .rocket__flame {
-  fill: var(--rust-hi); transform-origin: 10px 30px; transition: opacity 200ms ease-out;
+  fill: var(--rust-hi); transform-origin: 4px 12px; /* top centre of the flame, in pixel-art units */ transition: opacity 200ms ease-out;
   animation: rocket-flame 110ms ease-in-out infinite alternate;
 }
 .rocket[data-mode="landed"] .rocket__flame { opacity: 0; animation: none; }
@@ -325,16 +327,17 @@ table { border-collapse: collapse; }
 .rocket[data-mode="charging"] .rocket__flame { animation: rocket-flame-charge 700ms ease-in forwards; }
 @keyframes rocket-flame-charge { from { transform: scaleY(0.15); opacity: 0.4; } to { transform: scaleY(1.6) scaleX(1.15); opacity: 1; } }
 @keyframes rocket-flame-launch { from { transform: scaleY(1.4) scaleX(1.1); } to { transform: scaleY(2) scaleX(1.25); } }
-/* The moon below the projects: where the rocket hovers once you're past the last one. */
-.moon { width: 120px; margin: 0 auto; filter: drop-shadow(0 0 28px rgb(143 211 255 / 0.28)); }
+/* The moon below the projects: where the rocket circles once you're past the last one.
+   Planets are 16x16 pixel art, sized to whole 8px (6px on phones) pixels so edges stay crisp. */
+.moon { width: 128px; margin: 0 auto; filter: drop-shadow(0 0 28px rgb(143 211 255 / 0.28)); }
 .moon svg { display: block; width: 100%; height: auto; }
-/* Earth above the projects: where the rocket hovers before the first one. */
-.earth { width: 120px; margin: 0 auto 72px; padding-top: 56px; filter: drop-shadow(0 0 28px rgb(111 180 240 / 0.35)); }
+/* Earth above the projects: where the rocket circles before the first one. */
+.earth { width: 128px; margin: 0 auto 72px; padding-top: 56px; filter: drop-shadow(0 0 28px rgb(111 180 240 / 0.35)); }
 .earth svg { display: block; width: 100%; height: auto; }
-/* Launch smoke and sparks (created by Rocket while launching). */
-.rocket-fx { position: absolute; left: 0; top: 0; z-index: 1; border-radius: 50%; pointer-events: none; }
-.rocket-fx--smoke { width: 12px; height: 12px; background: radial-gradient(circle, rgb(205 218 232 / 0.55), rgb(205 218 232 / 0) 70%); }
-.rocket-fx--fire { width: 7px; height: 7px; background: radial-gradient(circle, #fff3c4, var(--rust-hi) 55%, rgb(192 112 58 / 0) 75%); }
+/* Launch smoke and sparks (created by Rocket while launching): square pixels to match the art. */
+.rocket-fx { position: absolute; left: 0; top: 0; z-index: 1; pointer-events: none; }
+.rocket-fx--smoke { width: 6px; height: 6px; background: rgb(205 218 232 / 0.5); }
+.rocket-fx--fire { width: 4px; height: 4px; background: #ffd27a; box-shadow: 0 0 0 2px var(--rust-hi); }
 @keyframes rocket-settle { 0% { transform: translateY(-3px); } 60% { transform: translateY(1px); } 100% { transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   .rocket__flame, .rocket[data-mode="landed"] svg { animation: none; }
@@ -394,7 +397,7 @@ table { border-collapse: collapse; }
   .when { position: static; width: auto; margin: 0 0 12px -28px; grid-template-columns: 28px minmax(0, 1fr); }
   .when__node { justify-self: start; margin-left: -1px; }
   .rocket { width: 14px; height: 28px; }
-  .moon, .earth { width: 90px; }
+  .moon, .earth { width: 96px; }
   .glass { position: static; }
   .lightbox__inner--project { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .drawer { padding-top: 56px; }

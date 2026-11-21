@@ -203,6 +203,87 @@ const easeInOut = (t) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2)
 // Turn angle `from` toward `to` (degrees) by fraction f, the short way round.
 const turn = (from, to, f) => from + ((((to - from) % 360) + 540) % 360 - 180) * f
 
+// Pixel art: one string per row, one character per pixel ('.' = empty). `ink` maps each character
+// to the props for its pixels (a fill or a className). Runs of the same character become one rect.
+function PixelArt({ rows, ink }) {
+  const rects = []
+  rows.forEach((row, y) => {
+    for (let x = 0; x < row.length;) {
+      let end = x + 1
+      while (row[end] === row[x]) end++
+      if (ink[row[x]]) rects.push(<rect key={`${x},${y}`} x={x} y={y} width={end - x} height={1} {...ink[row[x]]} />)
+      x = end
+    }
+  })
+  return (
+    <svg viewBox={`0 0 ${rows[0].length} ${rows.length}`} shapeRendering="crispEdges" focusable="false">
+      {rects}
+    </svg>
+  )
+}
+
+// The fins end 3/4 of the way down (row 12 of 16); Rocket's seat() relies on that. Below is flame.
+const ROCKET_ART = [
+  '...ff...',
+  '..bbbs..',
+  '..bbbs..',
+  '.bbbbbs.',
+  '.bcwwcs.',
+  '.bcwwcs.',
+  '.bbbbbs.',
+  '.bbbbbs.',
+  '.bbbbbs.',
+  'fbbbbbsf',
+  'fbbbbbsf',
+  'f.ffff.f',
+  '..yyyy..',
+  '..yyyy..',
+  '...yy...',
+  '...yy...',
+]
+const ROCKET_INK = {
+  b: { className: 'rocket__body' }, s: { className: 'rocket__shade' }, f: { className: 'rocket__fin' },
+  c: { className: 'rocket__frame' }, w: { className: 'rocket__window' }, y: { className: 'rocket__flame' },
+}
+const EARTH_ART = [
+  '.....ooowoo.....',
+  '...oowwooolld...',
+  '..oollloooolld..',
+  '.ollllloooolldd.',
+  '.olllllgooooldd.',
+  'oolllggloooooodd',
+  'oolllllloooooodd',
+  'ooolllloooolllod',
+  'oooollooooollldd',
+  'wwoooooooolllldd',
+  'ooowwoooooolgldd',
+  '.oooooooooolldd.',
+  '.oolloooooooddd.',
+  '..ollllooooodd..',
+  '...oolooooddd...',
+  '.....oddddd.....',
+]
+const EARTH_INK = { o: { fill: '#2f6fb3' }, d: { fill: '#173d6b' }, l: { fill: '#5f9a6a' }, g: { fill: '#3f7550' }, w: { fill: '#eef3f8' } }
+const MOON_ART = [
+  '.....hhhmmm.....',
+  '...hhhhmmmmms...',
+  '..hhccmmmmmmss..',
+  '.hhccmmmmcmmmss.',
+  '.hmmmmmmmmmmmss.',
+  'hmmmmmmmmmmmmmss',
+  'hmmmccmmmmmmmmss',
+  'mmmcccmmmmmcmmss',
+  'mmmmcmmmmmmmmsss',
+  'mmmmmmmmccmmmsss',
+  'mmcmmmmmcccmmsss',
+  '.mmmmmmmmcmmsss.',
+  '.mmmmmmmmmmssss.',
+  '..msmmmcmmssss..',
+  '...mmsmmsssss...',
+  '.....ssssss.....',
+]
+const MOON_INK = { h: { fill: '#eef3f8' }, m: { fill: '#b9c6d4' }, s: { fill: '#7d8ea3' }, c: { fill: '#8d9db1' } }
+
 function Rocket({ areaRef }) {
   const el = useRef(null)
   useEffect(() => {
@@ -483,13 +564,7 @@ function Rocket({ areaRef }) {
 
   return (
     <div className="rocket" ref={el} aria-hidden="true">
-      <svg viewBox="0 0 20 40" focusable="false">
-        <path className="rocket__flame" d="M7 30c0 4 1.5 7 3 9 1.5-2 3-5 3-9z" />
-        <path className="rocket__fin" d="M5 20 1 27v3l5-3zM15 20l4 7v3l-5-3z" />
-        <path className="rocket__body" d="M10 1c3.5 3 5 8 5 14v12H5V15C5 9 6.5 4 10 1z" />
-        <circle className="rocket__window" cx="10" cy="14" r="2.6" />
-        <path className="rocket__fin" d="M8 27h4v3H8z" />
-      </svg>
+      <PixelArt rows={ROCKET_ART} ink={ROCKET_INK} />
     </div>
   )
 }
@@ -533,26 +608,7 @@ export function Home() {
         <div className="timeline-area" ref={rocket.areaRef}>
         <Rocket areaRef={rocket.areaRef} />
         <div className="earth" aria-hidden="true">
-          <svg viewBox="0 0 120 120" focusable="false">
-            <defs>
-              <radialGradient id="earth-ocean" cx="0.38" cy="0.34" r="0.75">
-                <stop offset="0" stopColor="#6fb4f0" />
-                <stop offset="0.6" stopColor="#2f6fb3" />
-                <stop offset="1" stopColor="#173d6b" />
-              </radialGradient>
-              <clipPath id="earth-disc"><circle cx="60" cy="60" r="56" /></clipPath>
-            </defs>
-            <circle cx="60" cy="60" r="56" fill="url(#earth-ocean)" />
-            <g clipPath="url(#earth-disc)" fill="#5f9a6a" opacity="0.9">
-              <path d="M22 30c8-6 20-8 26-2 5 5 0 12 6 16 6 4 4 12-3 14-8 2-10 10-18 8-7-2-6-10-12-14-6-4-9-14 1-22z" />
-              <path d="M70 20c9-2 20 2 24 9 3 6-3 9 0 15 3 7-5 10-11 7-5-3-9 1-14-3-6-5 1-11-3-16-3-5-2-10 4-12z" />
-              <path d="M62 74c7-3 16 0 20 6 4 7-1 15-8 18-6 3-12-1-14-7-2-5-4-14 2-17z" />
-              <path d="M28 86c5-2 10 1 11 5 1 5-4 8-8 7-4-1-7-10-3-12z" />
-            </g>
-            <g clipPath="url(#earth-disc)" fill="none" stroke="#f4f8fb" strokeOpacity="0.45" strokeWidth="3" strokeLinecap="round">
-              <path d="M14 52c14-4 26 2 40-2" /><path d="M58 40c12-3 24 1 40-3" /><path d="M30 104c14-4 30 0 48-6" />
-            </g>
-          </svg>
+          <PixelArt rows={EARTH_ART} ink={EARTH_INK} />
         </div>
         <ol className="timeline">
           {projects.map((p, i) => (
@@ -563,23 +619,7 @@ export function Home() {
           ))}
         </ol>
         <div className="moon" aria-hidden="true">
-          <svg viewBox="0 0 120 120" focusable="false">
-            <defs>
-              <radialGradient id="moon-surface" cx="0.38" cy="0.34" r="0.75">
-                <stop offset="0" stopColor="#eef3f8" />
-                <stop offset="0.6" stopColor="#b9c6d4" />
-                <stop offset="1" stopColor="#7d8ea3" />
-              </radialGradient>
-            </defs>
-            <circle cx="60" cy="60" r="56" fill="url(#moon-surface)" />
-            <g fill="#8d9db1" opacity="0.55">
-              <circle cx="42" cy="44" r="10" /><circle cx="76" cy="36" r="6" /><circle cx="70" cy="72" r="13" />
-              <circle cx="36" cy="80" r="5" /><circle cx="90" cy="60" r="4" /><circle cx="55" cy="96" r="6" />
-            </g>
-            <g fill="none" stroke="#f4f8fb" strokeOpacity="0.5" strokeWidth="1.2">
-              <path d="M34 39a10 10 0 0 1 12-4" /><path d="M60 63a13 13 0 0 1 16-5" /><path d="M72 32a6 6 0 0 1 7-2" />
-            </g>
-          </svg>
+          <PixelArt rows={MOON_ART} ink={MOON_INK} />
         </div>
         </div>
       </main>
