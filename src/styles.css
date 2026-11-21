@@ -223,14 +223,10 @@ table { border-collapse: collapse; }
 }
 .glass__frame { position: relative; overflow: hidden; background: #000; }
 .glass__frame img {
-  filter: grayscale(1) contrast(1.08) brightness(0.95);
+  filter: brightness(1);
   transition: filter 1100ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.glass__frame::after { /* the plate's blue tone */
-  content: ""; position: absolute; inset: 0;
-  background: #5aa2e6; mix-blend-mode: multiply; pointer-events: none;
-}
-.js .glass:not(.is-lit) .glass__frame img { filter: grayscale(1) contrast(1.08) brightness(0.6); }
+.js .glass:not(.is-lit) .glass__frame img { filter: brightness(0.6); }
 @media (prefers-reduced-motion: reduce) {
   .glass__frame img { transition: none; }
 }
@@ -252,6 +248,8 @@ table { border-collapse: collapse; }
 .card--entry { container-type: inline-size; }
 /* In a narrow card (whatever the screen width), stack each route's methods above its path. */
 @container (max-width: 480px) {
+  .layer { grid-template-columns: 1.1rem minmax(0, 1fr); gap: 0 0.75rem; }
+  .layer__name { writing-mode: vertical-rl; rotate: 180deg; padding: 0; font-size: 0.6875rem; align-self: start; }
   .routes tr { display: grid; border-bottom: 1px solid var(--rule-blue); padding: 0.3rem 0 0.25rem; }
   .routes td { border-bottom: 0; padding: 0; }
   .routes code { overflow-wrap: anywhere; }
@@ -299,14 +297,56 @@ table { border-collapse: collapse; }
   border: 1.5px solid var(--ink-cyan); background: var(--void);
   box-shadow: 0 0 0 4px var(--void);
 }
-.timeline__item:first-child .when__node { background: var(--ink-cyan); }
+.when__node { transition: background-color 300ms ease-out, box-shadow 300ms ease-out; }
+.timeline__item.is-current .when__node { background: var(--ink-cyan); box-shadow: 0 0 0 4px var(--void), 0 0 14px 2px rgb(143 211 255 / 0.55); }
+
+/* The rocket: rides the rail at the scroll position and lands on dots (Rocket in pages.jsx). */
+.timeline-area { position: relative; }
+.rocket {
+  position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none;
+  width: 18px; height: 36px; will-change: transform;
+  filter: drop-shadow(0 4px 8px rgb(0 0 0 / 0.5));
+}
+.rocket svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.rocket__body { fill: var(--ice); }
+.rocket__window { fill: var(--glow); stroke: var(--ink-cyan); stroke-width: 1; }
+.rocket__fin { fill: var(--rust); }
+.rocket__flame {
+  fill: var(--rust-hi); transform-origin: 10px 30px; transition: opacity 200ms ease-out;
+  animation: rocket-flame 110ms ease-in-out infinite alternate;
+}
+.rocket[data-mode="landed"] .rocket__flame { opacity: 0; animation: none; }
+.rocket[data-mode="flying"] .rocket__flame { animation-name: rocket-flame-idle; } /* smaller while floating */
+.rocket[data-mode="landed"] svg { animation: rocket-settle 420ms cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes rocket-flame { from { transform: scaleY(0.8); } to { transform: scaleY(1.25); } }
+@keyframes rocket-flame-idle { from { transform: scaleY(0.45); } to { transform: scaleY(0.7); } }
+.rocket:is([data-mode="lifting"], [data-mode="turning"], [data-mode="assist"]) .rocket__flame { animation-name: rocket-flame-launch; animation-duration: 70ms; }
+/* Charging on the pad: the flame grows from a flicker to full launch power. */
+.rocket[data-mode="charging"] .rocket__flame { animation: rocket-flame-charge 700ms ease-in forwards; }
+@keyframes rocket-flame-charge { from { transform: scaleY(0.15); opacity: 0.4; } to { transform: scaleY(1.6) scaleX(1.15); opacity: 1; } }
+@keyframes rocket-flame-launch { from { transform: scaleY(1.4) scaleX(1.1); } to { transform: scaleY(2) scaleX(1.25); } }
+/* The moon below the projects: where the rocket hovers once you're past the last one. */
+.moon { width: 120px; margin: 0 auto; filter: drop-shadow(0 0 28px rgb(143 211 255 / 0.28)); }
+.moon svg { display: block; width: 100%; height: auto; }
+/* Earth above the projects: where the rocket hovers before the first one. */
+.earth { width: 120px; margin: 0 auto 72px; padding-top: 56px; filter: drop-shadow(0 0 28px rgb(111 180 240 / 0.35)); }
+.earth svg { display: block; width: 100%; height: auto; }
+/* Launch smoke and sparks (created by Rocket while launching). */
+.rocket-fx { position: absolute; left: 0; top: 0; z-index: 1; border-radius: 50%; pointer-events: none; }
+.rocket-fx--smoke { width: 12px; height: 12px; background: radial-gradient(circle, rgb(205 218 232 / 0.55), rgb(205 218 232 / 0) 70%); }
+.rocket-fx--fire { width: 7px; height: 7px; background: radial-gradient(circle, #fff3c4, var(--rust-hi) 55%, rgb(192 112 58 / 0) 75%); }
+@keyframes rocket-settle { 0% { transform: translateY(-3px); } 60% { transform: translateY(1px); } 100% { transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .rocket__flame, .rocket[data-mode="landed"] svg { animation: none; }
+}
+
 .timeline .entry { max-width: none; }
 .tags--synced { margin-top: 18px; }
 .glass__sky { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; }
 
 /* ---------- Close ---------- */
 .close {
-  padding: 96px var(--pad) 48px;
+  padding: 32px var(--pad) 48px; /* close to the moon above, so at the page bottom the moon and rocket sit well in view */
   background: radial-gradient(ellipse 60% 70% at 50% 110%, rgb(47 111 179 / 0.35), transparent 70%), var(--void);
 }
 .close__inner { max-width: 1360px; margin: 0 auto; display: grid; justify-items: center; gap: 40px; }
@@ -353,6 +393,8 @@ table { border-collapse: collapse; }
   .timeline::before { left: 6px; bottom: 88px; }
   .when { position: static; width: auto; margin: 0 0 12px -28px; grid-template-columns: 28px minmax(0, 1fr); }
   .when__node { justify-self: start; margin-left: -1px; }
+  .rocket { width: 14px; height: 28px; }
+  .moon, .earth { width: 90px; }
   .glass { position: static; }
   .lightbox__inner--project { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .drawer { padding-top: 56px; }

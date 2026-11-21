@@ -214,21 +214,6 @@
           "#e2e9f4"
         ]
       },
-      "plate-tone": {
-        "role": "primary",
-        "displayName": "Plate Tone",
-        "canonical": "#5aa2e6",
-        "tonalRamp": [
-          "#0f2a45",
-          "#1b4570",
-          "#2a649c",
-          "#3f83c6",
-          "#5aa2e6",
-          "#86bdee",
-          "#b6d7f5",
-          "#e3effb"
-        ]
-      },
       "star-white": {
         "role": "neutral",
         "displayName": "Star White",
@@ -418,7 +403,7 @@
       "refersTo": "glass-plate",
       "description": "Glass-blue holder around a blue-toned image, nothing written on it; brightens when it enters view.",
       "html": "<figure class=\"ds-glass\"><div class=\"ds-glass-frame\"><div class=\"ds-glass-img\"></div></div></figure>",
-      "css": ".ds-glass { margin: 0; max-width: 520px; background: var(--glass, #0b1f3a); padding: 14px; border: 1px solid rgb(143 211 255 / 0.22); box-shadow: 0 40px 80px -30px rgb(47 111 179 / 0.65); } .ds-glass-frame { position: relative; overflow: hidden; background: #000; aspect-ratio: 16 / 9; } .ds-glass-img { position: absolute; inset: 0; background: linear-gradient(160deg, #d8d8d8, #555); filter: brightness(0.6); transition: filter 1100ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-glass:hover .ds-glass-img { filter: brightness(0.95); } .ds-glass-frame::after { content: ''; position: absolute; inset: 0; background: #5aa2e6; mix-blend-mode: multiply; pointer-events: none; } @media (prefers-reduced-motion: reduce) { .ds-glass-img { transition: none; } }"
+      "css": ".ds-glass { margin: 0; max-width: 520px; background: var(--glass, #0b1f3a); padding: 14px; border: 1px solid rgb(143 211 255 / 0.22); box-shadow: 0 40px 80px -30px rgb(47 111 179 / 0.65); } .ds-glass-frame { position: relative; overflow: hidden; background: #000; aspect-ratio: 16 / 9; } .ds-glass-img { position: absolute; inset: 0; background: linear-gradient(160deg, #d8d8d8, #555); filter: brightness(0.6); transition: filter 1100ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-glass:hover .ds-glass-img { filter: brightness(0.95); } @media (prefers-reduced-motion: reduce) { .ds-glass-img { transition: none; } }"
     },
     {
       "name": "Hero Link Ring",
@@ -450,7 +435,7 @@
     "overview": "**Creative North Star: \"The Plate Archive\"**\n\nVisually, the site is an observatory's glass plate collection, kept in the dark. Each project is a plate: a deep-blue image lit on a light box, glowing out of a near-black room. Beside every plate sits a cream catalogue card that records what is underneath the picture: interface, logic, data. The metaphor lives only in the visuals; the copy speaks plainly about projects. The picture is what people see; the card is the computing, and the card is where the reading happens.\n\nDensity is low and deliberate. One plate fills the first viewport; project plates stack below it like a drawer, one per entry, each with its card in the next column. Light comes only from the plates and the light box (soft radial blue glows); everything else is the void. The hero sky is procedural SVG (a seeded star field, rust nebula columns mottled by anisotropic noise, a bright warm rim, fine dust), never a stock photograph, and the colophon says it is computer-generated.\n\nThe card side is a paper world: cream stock, a thick red header rule, thin blue ruling between rows, and typed mono field labels in a left column. The two worlds meet but never blend: dark ice-ink type on the void, near-black ink on the cream.",
     "keyCharacteristics": [
       "Near-black archive room (#05070c) lit only by blue light-box glows.",
-      "Glass plates: deep glass-blue holders, screenshots toned blue by grayscale plus a multiply wash.",
+      "Glass plates: deep glass-blue holders around full-colour screenshots.",
       "Cream catalogue cards with a red header rule, blue row ruling and mono field labels.",
       "Archivo ExtraBold display, tightly tracked; JetBrains Mono for typed field labels and routes.",
       "One ring geometry, used only on the hero plate as project links: dashed until visited, solid after.",
@@ -464,7 +449,7 @@
       },
       {
         "name": "The Blue Plate Rule",
-        "body": "Every project image is toned the same way: grayscale, slight contrast lift, multiplied by the plate tone, inside a glass holder. No full-colour screenshots.",
+        "body": "Every project image sits in a glass holder, in full colour. Marcus asked for the blue tone over screenshots to be removed, so don't tone, tint or desaturate them.",
         "section": "colors"
       },
       {
@@ -479,7 +464,7 @@
       }
     ],
     "dos": [
-      "Do tone every project image as a blue plate: grayscale(1) contrast(1.08), multiplied by the plate tone, in a glass holder.",
+      "Do show every project image in full colour inside a glass holder; never tint or desaturate it.",
       "Do put primary actions (email, LinkedIn, GitHub) on a cream catalogue card with typed field labels.",
       "Do separate card rows with 1px ruling blue and lead each with a mono red layer name in a label column.",
       "Do keep the 3px red rule under every card title.",
