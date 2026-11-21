@@ -16,7 +16,7 @@ function Ext({ href, children, className = '' }) {
   )
 }
 
-// Cream contact card: the primary action lives here.
+// Contact plate (ship-console styled): the primary action lives here.
 function Correspondence({ id, heading, children }) {
   return (
     <section className="card card--contact" aria-labelledby={id}>
@@ -554,6 +554,10 @@ function Rocket({ areaRef }) {
         if (Math.abs(t.y - s.y) < 0.6 && Math.abs(t.x - s.x) < 0.6 && Math.abs(turn(s.a, 0, 1) - s.a) < 2) { s.a = 0; set('landed') }
         else if (target() !== s.node || s.inst > ROCKET.LAND * 2) set('flying') // scrolling on again: carry on, don't touch down
       }
+
+      // Light the dot it's sitting on: it can land up to SNAP_IN px from the line that picks the current project.
+      const on = ['landing', 'landed', 'charging'].includes(s.mode) ? s.node : -1
+      if (on !== s.on) { s.on = on; area.querySelectorAll('.timeline__item').forEach((li, k) => li.classList.toggle('has-rocket', k === on)) }
 
       // Outside free flight, keep its velocity relative to the scroll line, so free flight (which
       // already moves with your scrolling) carries the motion on smoothly without counting it twice.
