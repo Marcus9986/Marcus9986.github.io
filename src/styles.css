@@ -320,6 +320,21 @@ table { border-collapse: collapse; }
 .rocket[data-mode="landed"] svg { animation: rocket-settle 420ms cubic-bezier(0.16, 1, 0.3, 1); }
 @keyframes rocket-flame { from { transform: scaleY(0.8); } to { transform: scaleY(1.25); } }
 @keyframes rocket-flame-idle { from { transform: scaleY(0.45); } to { transform: scaleY(0.7); } }
+.rocket:is([data-mode="lifting"], [data-mode="turning"], [data-mode="assist"]) .rocket__flame { animation-name: rocket-flame-launch; animation-duration: 70ms; }
+/* Charging on the pad: the flame grows from a flicker to full launch power. */
+.rocket[data-mode="charging"] .rocket__flame { animation: rocket-flame-charge 700ms ease-in forwards; }
+@keyframes rocket-flame-charge { from { transform: scaleY(0.15); opacity: 0.4; } to { transform: scaleY(1.6) scaleX(1.15); opacity: 1; } }
+@keyframes rocket-flame-launch { from { transform: scaleY(1.4) scaleX(1.1); } to { transform: scaleY(2) scaleX(1.25); } }
+/* The moon below the projects: where the rocket hovers once you're past the last one. */
+.moon { width: 120px; margin: 0 auto; filter: drop-shadow(0 0 28px rgb(143 211 255 / 0.28)); }
+.moon svg { display: block; width: 100%; height: auto; }
+/* Earth above the projects: where the rocket hovers before the first one. */
+.earth { width: 120px; margin: 0 auto 72px; padding-top: 56px; filter: drop-shadow(0 0 28px rgb(111 180 240 / 0.35)); }
+.earth svg { display: block; width: 100%; height: auto; }
+/* Launch smoke and sparks (created by Rocket while launching). */
+.rocket-fx { position: absolute; left: 0; top: 0; z-index: 1; border-radius: 50%; pointer-events: none; }
+.rocket-fx--smoke { width: 12px; height: 12px; background: radial-gradient(circle, rgb(205 218 232 / 0.55), rgb(205 218 232 / 0) 70%); }
+.rocket-fx--fire { width: 7px; height: 7px; background: radial-gradient(circle, #fff3c4, var(--rust-hi) 55%, rgb(192 112 58 / 0) 75%); }
 @keyframes rocket-settle { 0% { transform: translateY(-3px); } 60% { transform: translateY(1px); } 100% { transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   .rocket__flame, .rocket[data-mode="landed"] svg { animation: none; }
@@ -331,7 +346,7 @@ table { border-collapse: collapse; }
 
 /* ---------- Close ---------- */
 .close {
-  padding: 96px var(--pad) 48px;
+  padding: 32px var(--pad) 48px; /* close to the moon above, so at the page bottom the moon and rocket sit well in view */
   background: radial-gradient(ellipse 60% 70% at 50% 110%, rgb(47 111 179 / 0.35), transparent 70%), var(--void);
 }
 .close__inner { max-width: 1360px; margin: 0 auto; display: grid; justify-items: center; gap: 40px; }
@@ -379,6 +394,7 @@ table { border-collapse: collapse; }
   .when { position: static; width: auto; margin: 0 0 12px -28px; grid-template-columns: 28px minmax(0, 1fr); }
   .when__node { justify-self: start; margin-left: -1px; }
   .rocket { width: 14px; height: 28px; }
+  .moon, .earth { width: 90px; }
   .glass { position: static; }
   .lightbox__inner--project { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .drawer { padding-top: 56px; }
