@@ -278,6 +278,53 @@ table { border-collapse: collapse; }
 .embed { margin-top: 16px; aspect-ratio: 1480 / 800; border: 2px solid var(--glass); background: var(--void); }
 .embed iframe { width: 100%; height: 100%; border: 0; display: block; }
 
+/* ---------- Project and contact plates as a ship's console: re-scoping the card tokens recolours rules, tags and buttons too ---------- */
+.card:is(.card--entry, .card--contact) {
+  --card: #04110c;
+  --card-ink: #8dffc4;
+  --card-ink-2: #6fd9a6;
+  --card-muted: #4fa97c;
+  --rule-red: #ffb347;
+  --rule-blue: rgb(141 255 196 / 0.22);
+  --glass: #8dffc4;
+  --glow: #ffb347;
+  position: relative;
+  font-family: var(--mono);
+  font-size: 0.9375rem;
+  border: 2px solid #26342f;
+  border-radius: 10px;
+  padding-top: 52px;
+  background:
+    repeating-linear-gradient(to bottom, rgb(0 0 0 / 0.28) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at center, #072218 0%, var(--card) 75%);
+  text-shadow: 0 0 6px rgb(141 255 196 / 0.35);
+  box-shadow:
+    0 0 0 6px #121a17,
+    0 0 0 7px #2f3d37,
+    inset 0 0 60px rgb(0 0 0 / 0.75),
+    0 24px 50px -18px rgb(0 0 0 / 0.75);
+}
+.card:is(.card--entry, .card--contact)::before {
+  content: "\25CF  NAV-COMP // PROJECT FILE";
+  position: absolute; top: 0; left: 0; right: 0;
+  padding: 0.45rem 28px;
+  font-size: 0.6875rem; letter-spacing: 0.16em; color: var(--rule-red);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  border-bottom: 1px solid var(--rule-blue);
+  text-shadow: 0 0 6px rgb(255 179 71 / 0.5);
+}
+.card.card--contact::before { content: "\25CF  COMMS // OPEN CHANNEL"; }
+.card--contact .fields__email { font-weight: 700; }
+.card:is(.card--entry, .card--contact) .card__title { font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.02em; font-size: 1.75rem; border-bottom-width: 2px; }
+.card:is(.card--entry, .card--contact) .card__title::before { content: "> "; color: var(--rule-red); }
+.card:is(.card--entry, .card--contact) .card__title::after { content: "_"; animation: cursor-blink 1.1s steps(1) infinite; }
+.card:is(.card--entry, .card--contact) .layer__title { font-family: var(--mono); font-size: 1.0625rem; }
+.card:is(.card--entry, .card--contact) .btn { text-shadow: none; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.875rem; }
+.card:is(.card--entry, .card--contact) .btn:hover { color: var(--card); }
+.card:is(.card--entry, .card--contact) .tags--lg li { font-family: var(--mono); }
+@keyframes cursor-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .card:is(.card--entry, .card--contact) .card__title::after { animation: none; } }
+
 /* Timeline: newest first, dates on an ink rail down the left. */
 .timeline { position: relative; max-width: 1360px; margin: 0 auto; padding-left: 168px; }
 .timeline::before {
@@ -301,7 +348,9 @@ table { border-collapse: collapse; }
   transition: filter 300ms ease-out, box-shadow 300ms ease-out;
 }
 .when__node svg { display: block; width: 100%; height: 100%; }
-.timeline__item.is-current .when__node { filter: none; box-shadow: 0 0 0 4px var(--void), 0 0 18px 3px rgb(143 211 255 / 0.55); }
+.timeline__item.is-current .when__node, .timeline__item.has-rocket .when__node { filter: none; box-shadow: 0 0 0 4px var(--void), 0 0 18px 3px rgb(143 211 255 / 0.55); }
+/* While the rocket sits on a dot, that dot is the lit one. */
+.timeline:has(.has-rocket) .timeline__item.is-current:not(.has-rocket) .when__node { filter: saturate(0.55) brightness(0.7); box-shadow: 0 0 0 4px var(--void); }
 
 /* The rocket: rides the rail at the scroll position and lands on dots (Rocket in pages.jsx). */
 .timeline-area { position: relative; }
@@ -376,7 +425,7 @@ table { border-collapse: collapse; }
 /* ---------- Narrow screens ---------- */
 @media (max-width: 1180px) {
   .lightbox__inner:not(.lightbox__inner--project) { grid-template-columns: minmax(0, 1fr); }
-  .card--contact { grid-column: 1; grid-row: 2; margin: 16px 0 0; justify-self: end; width: min(100%, 440px); }
+  .card--contact { grid-column: 1; grid-row: 2; margin: 16px 0 0; justify-self: stretch; width: auto; }
   .hero__text { max-width: min(640px, calc(100% - 96px)); }
   .close .card--contact { justify-self: auto; }
 }
@@ -391,7 +440,6 @@ table { border-collapse: collapse; }
   .hero__text { left: 22px; right: 22px; bottom: 26px; max-width: none; }
   .hero::before { background: linear-gradient(to top, rgb(5 7 12 / 0.94), rgb(5 7 12 / 0.82) 38%, rgb(5 7 12 / 0.2) 62%, transparent 75%); }
   .hero__intro { font-size: 1.0625rem; }
-  .card--contact { grid-column: 1; grid-row: 2; margin: 16px 0 0; justify-self: stretch; width: auto; }
   .close .card--contact { margin: 0; }
   .card { padding: 22px; }
   .entry { grid-template-columns: minmax(0, 1fr); gap: 20px; margin-bottom: 88px; }
