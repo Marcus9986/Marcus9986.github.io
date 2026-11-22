@@ -196,6 +196,7 @@ const ROCKET = {
   ORBIT_MS: 6000, // one lap round the earth or moon while parked there
   SLACK: 30, // how far it may drift either side of the rail while following
   FAST: 700, // scroll speed (px per second) above which it slingshots past dots instead of landing
+  ASSIST_PAST: 10, // ...starting the loop once the scroll line is this far past the dot (px)
   LAND: 150, // it only lands once you're scrolling slower than this (px/s), so it skips dots you scroll past
   LAND_DELAY: 350, // ...and have stayed that slow this long (ms), so brief pauses mid-scroll don't trigger a landing
 }
@@ -407,12 +408,15 @@ function Rocket({ areaRef }) {
       // scrolling, the dot can scroll away but the rocket stays with you on screen. It drifts to
       // where the arc's end point lands on the line, so the rocket finishes there, not past it.
       // With follow=false (gravity assist) the centre stays on the dot, so it really loops round it.
+      // On phones the rail is near the screen edge: shift a circle of radius r right just enough to stay on screen.
+      const edgeShift = (i, r) => Math.max(0, r + h * 0.5 + 4 - (box.left + nodes[i].x))
       const orbit = (i, th0, sweep, r0, r1, t, follow = true) => {
         const th = th0 + sweep * t, r = r1 - (r1 - r0) * (1 - Math.min(t / 0.33, 1)) ** 2
         const end = Math.min(Math.max(line, nodes[0].y), railEnd) - r1 * Math.sin(th0 + sweep)
         const cy = follow ? nodes[i].y + (end - nodes[i].y) * t * t : nodes[i].y
-        // On phones the rail is near the screen edge: shift the circle right just enough to stay on screen.
-        const cx = nodes[i].x + Math.max(0, r + h * 0.5 + 4 - (box.left + nodes[i].x))
+        // A gravity assist keeps one fixed centre (sized for its full radius), the same one its start
+        // angle was measured from, so on phones it doesn't jump sideways into the loop.
+        const cx = nodes[i].x + edgeShift(i, follow ? r : r1)
         return [cx + r * Math.cos(th), cy + r * Math.sin(th)]
       }
       // Fire and smoke out of the tail, opposite the nose.
@@ -532,7 +536,7 @@ function Rocket({ areaRef }) {
         const ahead = fast && nodes.findIndex((n, k) => k !== 0
           && !(k === s.assisted && now - s.assistAt < 1500)
           && Math.abs(n.y - s.y) < 150
-          && (line - n.y) * heading > ROCKET.SNAP_IN && (line - n.y) * heading < 150)
+          && (line - n.y) * heading > ROCKET.ASSIST_PAST && (line - n.y) * heading < 150)
         if (s.orb) {
           // Still circling the earth or moon: no slingshots or landings until it has let go.
         } else if (fast && s.inst > ROCKET.FAST && ahead >= 0) {
@@ -540,8 +544,9 @@ function Rocket({ areaRef }) {
           s.node = ahead
           // From where it is now, round to the dot's right side (angle 0) a full lap later, which is
           // where the orbit's direction of travel matches the scroll (down when sweeping clockwise).
-          const th = Math.atan2(s.y - n.y, s.x - n.x)
-          s.from = { th, sweep: heading * 2 * Math.PI - th, r: Math.hypot(s.x - n.x, s.y - n.y) }
+          const cx = n.x + edgeShift(ahead, ROCKET.ASSIST_R)
+          const th = Math.atan2(s.y - n.y, s.x - cx)
+          s.from = { th, sweep: heading * 2 * Math.PI - th, r: Math.hypot(s.x - cx, s.y - n.y) }
           set('assist')
         } else if (settled) { // only once you've (nearly) stopped on a dot, not while passing it
           const i = target()
