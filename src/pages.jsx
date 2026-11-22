@@ -473,7 +473,7 @@ function Rocket({ areaRef }) {
         else if (k >= 1) set('flying')
       } else if (s.mode === 'assist') {
         // Gravity assist: a full lap round the dot, speeding up as it goes (k^1.6: gentle enough that
-        // the whole circle is visible), flung off the right side heading the way you're scrolling.
+        // the whole circle is visible), flung off the side it came in on, heading the way you're scrolling.
         // It then catches back up to the scroll line.
         const k = progress(ROCKET.ASSIST_MS) ** 1.6
         moveTo(...orbit(s.node, s.from.th, s.from.sweep, s.from.r, ROCKET.ASSIST_R, k, false))
@@ -542,11 +542,14 @@ function Rocket({ areaRef }) {
         } else if (fast && s.inst > ROCKET.FAST && ahead >= 0) {
           const n = nodes[ahead]
           s.node = ahead
-          // From where it is now, round to the dot's right side (angle 0) a full lap later, which is
-          // where the orbit's direction of travel matches the scroll (down when sweeping clockwise).
+          // Loop the way it's already going: on the dot's right side heading down that's clockwise, on
+          // the left side counter-clockwise (and the reverse heading up), so it never doubles back.
+          // It goes a full lap round to the same side it started on, where it's heading the way you scroll.
           const cx = n.x + edgeShift(ahead, ROCKET.ASSIST_R)
           const th = Math.atan2(s.y - n.y, s.x - cx)
-          s.from = { th, sweep: heading * 2 * Math.PI - th, r: Math.hypot(s.x - cx, s.y - n.y) }
+          const side = s.x >= cx ? 1 : -1, end = side > 0 ? 0 : Math.PI
+          const gap = ((((end - th) % (2 * Math.PI)) + 3 * Math.PI) % (2 * Math.PI)) - Math.PI // end - th, wrapped to ±π
+          s.from = { th, sweep: side * heading * 2 * Math.PI + gap, r: Math.hypot(s.x - cx, s.y - n.y) }
           set('assist')
         } else if (settled) { // only once you've (nearly) stopped on a dot, not while passing it
           const i = target()
