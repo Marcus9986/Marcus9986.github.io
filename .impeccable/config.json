@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font-size",
+        "value": "2.25rem",
+        "createdAt": "2026-11-19T02:44:12.955Z",
+        "reason": "Claude: fluid minimum for long project names on project pages (hero__name--project), added to stop titles running under the screenshot"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgb(205 218 232 / 0.55)",
+        "createdAt": "2026-11-21T02:48:16.044Z",
+        "reason": "Claude: rocket launch smoke colour, decorative effect only"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#fff3c4",
+        "createdAt": "2026-11-21T02:48:16.117Z",
+        "reason": "Claude: white-hot core of rocket launch sparks, decorative effect only"
+      }
+    ]
+  }
+}

@@ -58,7 +58,7 @@ export const drafts = [
       },
     },
     credit: {
-      mine: 'I found the free assets (terrain, planets and sun, skybox, building, character model), built the terrain and the bar’s interior, and did the level design. I wrote the player and camera movement, the animation state machine (idle, running, floating), the orbiting planets, and the gravity change when entering or leaving the bar. TODO: add your Assignment 3 and later work (e.g. LevelSelect, PauseMenu, CurrentScore, AudioLevel).',
+      mine: 'I found the free assets (terrain, planets and sun, skybox, building, character model), built the terrain and the bar’s interior, and did the level design. I wrote the player and camera movement, the animation state machine (idle, running, floating), the orbiting planets, and the gravity change when entering or leaving the bar. I also implemented the level select screen (title screen), pause menu, score ui, and audio scripts.',
       team: 'Nicholas Tillo built the joke system, its UI, the microphone and scoring. Kabeer Adil handled the alien assets and the alien emotion states.',
     },
     stack: ['Unity', 'C#', 'Unity NavMesh', 'Unity Input System'],
@@ -66,7 +66,7 @@ export const drafts = [
       { label: 'Watch the demo', href: 'https://www.youtube.com/watch?v=O5wmU3lJKOU', external: true },
       { label: 'View on GitHub', href: 'https://github.com/Marcus9986/CISC486GD-extraterrestrial-entertainment', external: true },
     ],
-        image: { src: '/img/EE-Screenshot.png', alt: 'The title screen for Extraterrestial Entertainment, a space bar, with the comedy stage and alien audience', width: 1200, height: 750 },
+    image: { src: '/img/extraterrestrial.webp', alt: 'The title screen for Extraterrestrial Entertainment: the space bar on a moon, with Play and Quit buttons', width: 1200, height: 666 },
   },
   {
     slug: 'nsa-spherex',
