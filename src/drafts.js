@@ -68,5 +68,40 @@ export const drafts = [
     ],
     image: { src: '/img/extraterrestrial.webp', alt: 'The title screen for Extraterrestrial Entertainment: the space bar on a moon, with Play and Quit buttons', width: 1200, height: 666 },
   },
+  {
+    slug: 'nsa-spherex',
+    repo: 'NSA-SPHEREX',
+    when: { start: '2026-11', end: '2026-11', label: 'Nov 2026' },
+    name: 'Planet X and SPHEREx',
+    tagline: 'A web app for exploring NASA’s SPHEREx infrared sky survey',
+    bands: {
+      surface: {
+        title: 'Every SPHEREx image of any spot in the sky',
+        body: 'Pick a position or search an object by name, and see every image SPHEREx has taken of it. Play them back over time, sweep across wavelengths from 0.75 to 5 µm, and subtract one night from another to look for anything that moved. Built by a team for the 2026 NASA Space Apps Challenge.',
+      },
+      logic: {
+        title: 'A FastAPI backend and a WebGL2 renderer',
+        body: 'The Python backend asks NASA/IPAC’s IRSA for every image covering the target, downloads a small cutout of each, and lines them all up on the same north-up grid. The React front end draws the raw pixels with WebGL2, and the image processing runs as GPU shaders.',
+        routes: [
+          ['GET', '/api/spherex/images'],
+          ['GET', '/api/spherex/image/meta · /image/data'],
+          ['GET', '/api/spherex/diff/meta · /diff/data'],
+          ['GET', '/api/survey/list · /images · /data'],
+          ['GET', '/api/solar-system/bodies'],
+          ['GET', '/api/resolve'],
+        ],
+      },
+      data: {
+        title: 'Live survey data, cached at every step',
+        body: 'Every image is real SPHEREx data fetched live from IRSA, with 2MASS, WISE and DSS2 for comparison. Search results are cached for a day in a JSON file per position, cutouts sit in a size-limited disk cache, and the view state lives in the URL so any view can be shared.',
+        models: ['useFrames', 'urlState', 'processing', 'data/objects', 'data/land'],
+      },
+    },
+    credit: {
+      mine: 'The FastAPI backend’s SPHEREx side: searching IRSA, cutouts and difference imaging, plus the API docs and Python setup. On the front end I wrote the client that talks to the backend, the image timeline and playback, the sidebar with every frame’s metadata, the target form, shareable URLs, drag-to-change inputs and the coastlines on the sky gizmo. I also built the export menu and deployed it to Vercel.',
+      team: 'Hunter Coker set up the React and Vite app and its panel layout, and wrote the WebGL2 renderer, the image-processing shaders, the sky gizmo, the measure tool, object search, the known-bodies overlay and the survey comparison views, with their backend endpoints.',
+    },
+    stack: ['React', 'TypeScript', 'Vite', 'WebGL2', 'Python', 'FastAPI', 'astropy', 'astroquery', 'NumPy', 'SciPy', 'Vercel'],
+  },
   // END DRAFTS (new drafts are inserted above this line)
 ]
