@@ -102,6 +102,7 @@ export const drafts = [
       team: 'Hunter Coker set up the React and Vite app and its panel layout, and wrote the WebGL2 renderer, the image-processing shaders, the sky gizmo, the measure tool, object search, the known-bodies overlay and the survey comparison views, with their backend endpoints.',
     },
     stack: ['React', 'TypeScript', 'Vite', 'WebGL2', 'Python', 'FastAPI', 'astropy', 'astroquery', 'NumPy', 'SciPy', 'Vercel'],
+    image: { src: '/img/nsa-spherex.webp', alt: 'The Planet X and SPHEREx app: target coordinates and image metadata on the left, a SPHEREx infrared image of a star field in the middle with a sky globe above it, and the playback timeline below.', width: 1200, height: 750 },
   },
   // END DRAFTS (new drafts are inserted above this line)
 ]
